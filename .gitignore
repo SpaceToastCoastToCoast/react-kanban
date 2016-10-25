@@ -1,1 +1,8 @@
 node_modules
+
+# Config file for db
+**/config.json
+
+**/dump.rdb
+
+*.log
