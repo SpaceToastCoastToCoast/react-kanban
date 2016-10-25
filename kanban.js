@@ -73,6 +73,15 @@ app.listen(3000, function() {
   db.sequelize.sync();
 });
 
+app.get('/api', (req, res) => {
+  Card.findAll({
+    order: [['id', 'DESC']]
+  })
+  .then((data)=>{
+    res.json({data: data});
+  });
+});
+
 app.get('/:page', (req, res) => {
   res.status(404).json({error: 'file not found'});
 });
