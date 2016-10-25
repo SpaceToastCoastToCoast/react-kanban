@@ -9,7 +9,9 @@ module.exports = {
         priority: "LOW",
         status: "TO DO",
         creator_id: 1,
-        assignee_id: 1
+        assignee_id: 1,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },
       {
         title: "Clean fishtank",
@@ -17,7 +19,9 @@ module.exports = {
         priority: "MEDIUM",
         status: "DOING",
         creator_id: 1,
-        assignee_id: 1
+        assignee_id: 1,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },
       {
         title: "Plug leak",
@@ -25,18 +29,17 @@ module.exports = {
         priority: "HIGH",
         status: "DONE",
         creator_id: 1,
-        assignee_id: 1
+        assignee_id: 1,
+        createdAt: new Date(),
+        updatedAt: new Date()
       }
     ], {});
   },
 
   down: function (queryInterface, Sequelize) {
-    /*
-      Add reverting commands here.
-      Return a promise to correctly handle asynchronicity.
-
-      Example:
-      return queryInterface.bulkDelete('Person', null, {});
-    */
+    return queryInterface.bulkDelete('Cards',
+    {
+      title: ['Plug leak', 'Clean fishtank', 'Feed fish']
+    }, {});
   }
 };

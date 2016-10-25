@@ -9,7 +9,9 @@ module.exports = {
     return queryInterface.bulkInsert('Users', [
       {
         username: 'kanbanadmin',
-        password: bcrypt.hashSync(admin_password, salt)
+        password: bcrypt.hashSync(admin_password, salt),
+        createdAt: new Date(),
+        updatedAt: new Date()
       }
     ], {});
   },
