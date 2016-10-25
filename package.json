@@ -1,0 +1,36 @@
+{
+  "name": "react-kanban",
+  "version": "1.0.0",
+  "description": "",
+  "main": "kanban.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SpaceToastCoastToCoast/react-kanban.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SpaceToastCoastToCoast/react-kanban/issues"
+  },
+  "homepage": "https://github.com/SpaceToastCoastToCoast/react-kanban#readme",
+  "dependencies": {
+    "bcrypt": "^0.8.7",
+    "body-parser": "^1.15.2",
+    "connect-flash": "^0.1.1",
+    "connect-redis": "^3.1.0",
+    "express": "^4.14.0",
+    "express-session": "^1.14.1",
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.0",
+    "gulp-connect": "^5.0.0",
+    "gulp-sass": "^2.3.2",
+    "passport": "^0.3.2",
+    "sass": "^0.5.0",
+    "sequelize": "^3.24.5",
+    "sequelize-cli": "^2.4.0"
+  }
+}
