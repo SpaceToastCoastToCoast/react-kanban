@@ -32,7 +32,6 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING,
       default: 'TO DO',
       validate: {
-        isAlphanumeric: true,
         isIn: [['TO DO', 'DOING', 'DONE']]
       }
     },

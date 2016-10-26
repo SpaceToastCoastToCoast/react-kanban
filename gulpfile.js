@@ -60,4 +60,4 @@ gulp.task('redis-server', function() {
 
 gulp.task('default', ['dev']);
 
-gulp.task('dev', ['redis-server', 'watch', 'sass', 'browser-sync']);
+gulp.task('dev', ['watch', 'sass']);

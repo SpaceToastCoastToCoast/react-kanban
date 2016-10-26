@@ -1,3 +1,5 @@
+'use strict';
+
 const express = require('express');
 const bodyParser = require('body-parser');
 const CONFIG = require('./config/config.json');
@@ -11,6 +13,12 @@ const flash = require('connect-flash');
 const db = require('./models');
 const Card = db.Card;
 const User = db.User;
+const path = require('path');
+const fs = require('fs');
+const webpack = require('webpack');
+const webpackMiddleware = require('webpack-dev-middleware');
+const webpackHotMiddleware = require('webpack-hot-middleware');
+const config = require('./webpack.config.js');
 
 app.use(express.static('./public'));
 app.use(bodyParser.urlencoded({ extended: true}));
@@ -69,9 +77,9 @@ const isAuthenticated = (req, res, next) => {
   }
 };
 
-app.listen(3000, function() {
-  db.sequelize.sync();
-});
+// Check to see what dev environment we are in
+const isDeveloping = process.env.NODE_ENV !== 'production';
+const port = isDeveloping ? 3000 : process.env.PORT;
 
 app.get('/api', (req, res) => {
   Card.findAll({
@@ -82,8 +90,71 @@ app.get('/api', (req, res) => {
   });
 });
 
-app.get('/:page', (req, res) => {
-  res.status(404).json({error: 'file not found'});
+app.post('/api', (req, res) => {
+  Card.create({
+    title: req.body.title,
+    description: req.body.description,
+    priority: req.body.priority,
+    status: req.body.status,
+    creator_id: 1,
+    assignee_id: 1 })
+  .then(() => {
+    console.log("posted");
+    Card.findAll({
+      order: [['id', 'DESC']]
+    })
+    .then((data)=>{
+      res.json({data: data});
+    });
+  })
+  .catch((error) => {
+    console.error(error);
+  });
 });
+
+if (isDeveloping) {
+  app.set('host', 'http://localhost');
+  const compiler = webpack(config);
+  const middleware = webpackMiddleware(compiler, {
+    publicPath: config.output.publicPath,
+    contentBase: 'src',
+    stats: {
+      colors: true,
+      hash: false,
+      timings: true,
+      chunks: false,
+      chunkModules: false,
+      modules: false,
+    },
+  });
+  const response = (req, res) => {
+    res.write(middleware.fileSystem.readFileSync(path.resolve(__dirname, 'dist/index.html')));
+    res.end();
+  };
+
+  app.use(middleware);
+  app.use(webpackHotMiddleware(compiler));
+  app.get('*', response);
+} else {
+  app.use(express.static(`${__dirname}/dist`));
+  app.get('*', (req, res) => {
+    res.write(
+      fs.readFileSync(path.resolve(__dirname, 'dist/index.html'))
+    );
+  });
+}
+
+const onStart = (err) => {
+  if (err) {
+    throw new Error(err);
+  }
+  console.info(
+    `==> 🌎 Listening on port ${port}. ` +
+    `Open up http://localhost:${port}/ in your browser.`
+  );
+  db.sequelize.sync();
+};
+
+app.listen(port, 'localhost', onStart);
 
 module.exports = app;
