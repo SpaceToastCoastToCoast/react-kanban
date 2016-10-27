@@ -39,7 +39,6 @@ class KanbanQueue extends React.Component {
       <div id="kanbanQueue" className="column">
         { queueName }
         { queueItems }
-
       </div>
     )
   }
