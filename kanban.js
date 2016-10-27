@@ -20,6 +20,12 @@ const webpackMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
 const config = require('./webpack.config.js');
 
+const priority = {
+  high: 'HIGH',
+  medium: 'MEDIUM',
+  low: 'LOW'
+};
+
 app.use(express.static('./public'));
 app.use(bodyParser.urlencoded({ extended: true}));
 app.use(flash());
@@ -83,7 +89,7 @@ const port = isDeveloping ? 3000 : process.env.PORT;
 
 app.get('/api', (req, res) => {
   Card.findAll({
-    order: [['id', 'DESC']]
+    order: [['priority', 'ASC']]
   })
   .then((data)=>{
     res.json({data: data});
@@ -105,6 +111,30 @@ app.post('/api', (req, res) => {
     })
     .then((data)=>{
       res.json({data: data});
+    });
+  })
+  .catch((error) => {
+    console.error(error);
+  });
+});
+
+app.put('/api/:id', (req, res) => {
+  console.log('req.params.id', req.params.id);
+  console.log('req.body', req.body);
+  Card.findById(parseInt(req.params.id))
+  .then((card) => {
+    console.log('card', card);
+    card.update({
+      priority: req.body.priority || card.priority,
+      status: req.body.status || card.status
+    })
+    .then(() => {
+      Card.findAll({
+        order: [['id', 'DESC']]
+      })
+      .then((data)=>{
+        res.json({data: data});
+      });
     });
   })
   .catch((error) => {

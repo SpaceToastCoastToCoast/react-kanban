@@ -2,8 +2,6 @@ import React from 'react';
 import KanbanHeader from './KanbanHeader';
 import NewTaskForm from './NewTaskForm';
 import KanbanQueue from './KanbanQueue';
-import KanbanDoing from './KanbanDoing';
-import KanbanDone from './KanbanDone';
 
 class KanbanPage extends React.Component {
   constructor() {
@@ -49,9 +47,24 @@ class KanbanPage extends React.Component {
         apiAddress={this.props.apiAddress}
         />
         <div id="main">
-          <KanbanQueue data={this.state.data} />
-          <KanbanDoing data={this.state.data} />
-          <KanbanDone data={this.state.data} />
+          <KanbanQueue
+            data={this.state.data}
+            postTo={this.postAction}
+            apiAddress={this.props.apiAddress}
+            listType="TO_DO"
+          />
+          <KanbanQueue
+            data={this.state.data}
+            postTo={this.postAction}
+            apiAddress={this.props.apiAddress}
+            listType="DOING"
+          />
+          <KanbanQueue
+            data={this.state.data}
+            postTo={this.postAction}
+            apiAddress={this.props.apiAddress}
+            listType="DONE"
+          />
         </div>
       </div>
     )

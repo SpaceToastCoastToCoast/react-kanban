@@ -24,15 +24,14 @@ module.exports = function(sequelize, DataTypes) {
     priority: {
       type: DataTypes.STRING,
       validate: {
-        isAlphanumeric: true,
-        len: [2, 255]
+        isIn: [['3 LOW', '2 MEDIUM', '1 HIGH']]
       }
     },
     status: {
       type: DataTypes.STRING,
-      default: 'TO DO',
+      default: 'TO_DO',
       validate: {
-        isIn: [['TO DO', 'DOING', 'DONE']]
+        isIn: [['TO_DO', 'DOING', 'DONE']]
       }
     },
     creator_id: {

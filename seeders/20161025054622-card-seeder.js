@@ -6,8 +6,8 @@ module.exports = {
       {
         title: "Feed fish",
         description: "don't overfeed them",
-        priority: "LOW",
-        status: "TO DO",
+        priority: "3 LOW",
+        status: "TO_DO",
         creator_id: 1,
         assignee_id: 1,
         createdAt: new Date(),
@@ -16,7 +16,7 @@ module.exports = {
       {
         title: "Clean fishtank",
         description: "nasty!",
-        priority: "MEDIUM",
+        priority: "2 MEDIUM",
         status: "DOING",
         creator_id: 1,
         assignee_id: 1,
@@ -26,7 +26,7 @@ module.exports = {
       {
         title: "Plug leak",
         description: "the fish are dying!",
-        priority: "HIGH",
+        priority: "1 HIGH",
         status: "DONE",
         creator_id: 1,
         assignee_id: 1,

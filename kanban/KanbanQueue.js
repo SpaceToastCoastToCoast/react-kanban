@@ -1,16 +1,23 @@
 import React from 'react';
 import KanbanItem from './KanbanItem';
 
-const status = {
-  TO_DO: "TO DO",
-  DOING: "DOING",
-  DONE: "DONE"
-}
-
 class KanbanQueue extends React.Component {
   render() {
+    let queueName;
+    switch(this.props.listType) {
+      case 'TO_DO':
+      queueName = <h2>To Do</h2>;
+      break;
+      case 'DOING':
+      queueName = <h2>Doing</h2>;
+      break;
+      case 'DONE':
+      queueName = <h2>Done</h2>;
+      break;
+      default: break;
+    }
     const queueItems = this.props.data.filter((dataItem) => {
-      return dataItem.status === status.TO_DO;
+      return dataItem.status === this.props.listType;
     }).map((queueItem) => {
       return (
         <KanbanItem
@@ -21,13 +28,18 @@ class KanbanQueue extends React.Component {
           createdBy={queueItem.creator_id}
           assignedTo={queueItem.assignee_id}
           key={queueItem.id}
-          className="toDo"
+          itemId={queueItem.id}
+          postTo={this.props.postTo}
+          apiAddress={this.props.apiAddress}
+          className={this.props.listType}
         />
       )
     })
     return (
       <div id="kanbanQueue" className="column">
+        { queueName }
         { queueItems }
+
       </div>
     )
   }

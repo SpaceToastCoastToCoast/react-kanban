@@ -19,9 +19,9 @@ class NewTaskForm extends React.Component {
         <input type="text" name="title" ref="title" placeholder="Title"></input>
         <input type="text" name="description" ref="description" placeholder="Description"></input>
         <select name="priority" ref="priority">
-          <option value="LOW">LOW</option>
-          <option value="MEDIUM">MEDIUM</option>
-          <option value="HIGH">HIGH</option>
+          <option value="3 LOW">LOW</option>
+          <option value="2 MEDIUM">MEDIUM</option>
+          <option value="1 HIGH">HIGH</option>
         </select>
         <select name="status" ref="status">
           <option value="TO DO">TO DO</option>
