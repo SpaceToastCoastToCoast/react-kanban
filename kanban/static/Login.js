@@ -9,8 +9,10 @@ class Login extends React.Component {
           <h1>Login</h1>
         </div>
         <div id="main">
-          <LoginForm className="login" />
-          <LoginForm className="createUser" />
+          <div id="formContainer">
+            <LoginForm className="login" />
+            <LoginForm className="createUser" />
+          </div>
         </div>
       </div>
     )

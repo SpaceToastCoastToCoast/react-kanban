@@ -90,7 +90,7 @@ h3 {
   padding-top: 8px;
   transition: top 0.5s ease;
   background-color: $header-text-color;
-  width: 260px;
+  width: 248px;
   padding: 4px;
   box-sizing: border-box;
 }
@@ -99,7 +99,7 @@ form {
   margin-top: 10px;
   text-align: center;
   input, select, button {
-    width: 252px;
+    width: 240px;
     text-align: left;
     margin: auto;
     background-color: $dark-color;
@@ -133,11 +133,11 @@ form {
   align-items: center;
   justify-content: space-between;
   width: 416px;
-  max-width: 70%;
+  max-width: 65%;
   z-index: 1000;
   height: $header-height;
   li {
-    margin-left: 8px;
+    margin-left: 4px;
     z-index: 1001;
     width: 96px;
     list-style-type: none;
@@ -164,7 +164,49 @@ form {
 }
 
 .login, .createUser {
-  width: 250px;
+  padding: 8px;
+  width: 260px;
+  margin-bottom: 16px;
+  margin-top: 4px;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0px 1px 2px $header-shadow-color;
+  @include respond-to(medium) {
+    margin-right: 8px;
+  }
+  h2 {
+    text-align: center;
+  }
+}
+
+.login {
+  background-color: $low-background-color;
+  background: linear-gradient($low-background-color, $low-gradient-color, $low-background-color);
+}
+
+.createUser {
+  background-color: $high-background-color;
+  background: linear-gradient($high-background-color, $high-gradient-color, $high-background-color);
+}
+
+.loginForm {
+  width: 240px;
+}
+
+#formContainer {
+  box-sizing: border-box;
+  width: 100%;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: space-between;
+  @include respond-to(medium) {
+    align-items: center;
+    justify-content: flex-start;
+    flex-flow: row nowrap;
+  }
 }
 
 #main {
@@ -264,7 +306,8 @@ form {
 
 .LOW {
   background-color: $low-background-color;
-  background: linear-gradient($low-background-color, $low-gradient-color, $low-background-color);
+  border-top: 1px solid $low-background-color;
+  background: linear-gradient($low-gradient-color, $low-background-color);
   button {
     margin: 4px;
     transform: rotate(15deg);
@@ -278,7 +321,8 @@ form {
 
 .MEDIUM {
   background-color: $medium-background-color;
-  background: linear-gradient($medium-background-color, $medium-gradient-color, $medium-background-color);
+  border-top: 1px solid $medium-background-color;
+  background: linear-gradient($medium-gradient-color, $medium-background-color);
   button {
     margin: 4px;
     transform: rotate(15deg);
@@ -292,7 +336,8 @@ form {
 
 .HIGH{
   background-color: $high-background-color;
-  background: linear-gradient($high-background-color, $high-gradient-color, $high-background-color);
+  border-top: 1px solid $high-background-color;
+  background: linear-gradient($high-gradient-color, $high-background-color);
   button {
     margin: 4px;
     transform: rotate(15deg);

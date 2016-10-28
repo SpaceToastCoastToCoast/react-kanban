@@ -4,6 +4,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const CONFIG = require('./config/config.json');
 const log = require ('./middleware/log');
+const validate = require('./middleware/validation');
 const app = express();
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
@@ -81,29 +82,62 @@ passport.use(ls);
 
 const isAuthenticated = (req, res, next) => {
   if(!req.isAuthenticated()) {
-    return res.redirect('/login');
+    return res.json({
+      login: undefined
+    });
   } else {
     return next();
   }
 };
 
 app.get('/login', (req, res) => {
-  res.render('login', {
-    status: 'valid',
-    //failureMsg: req.flash('error')[0]
-  });
+  let username;
+  if(req.user !== undefined) {
+    username = req.user.username;
+  } else {
+    username = undefined;
+  }
+  res.json({
+    check: "hit",
+    login: username
+  })
 });
 
 app.get('/logout', (req, res) => {
   req.logout();
-  res.redirect('/');
 });
 
-app.post('/login', passport.authenticate('local', {
-    successRedirect: '/gallery',
-    failureRedirect: '/login',
-    //failureFlash: 'Invalid login'
-}));
+app.post('/login', passport.authenticate('local'), (req, res) => {
+  let username;
+  if(req.user !== undefined) {
+    username = req.user.username;
+  } else {
+    username = undefined;
+  }
+  res.json({
+    check: "hit POST",
+    login: username
+  })
+});
+
+app.post('/users', validate.userValidate, (req, res) => {
+  //to create a new gallery photo
+  bcrypt.genSalt(10, (err, salt) => {
+    bcrypt.hash(req.body.password, salt, (err, hash) => {
+      User.create({ username: req.body.username,
+        password: hash,
+        emailaddress: req.body.email,
+        role: 'USER'})
+      .then((user) => {
+        res.render('login', {status: 'valid'});
+      })
+      .catch((err) => {
+        //req.flash('info', 'Invalid input in user account fields');
+        res.render('login', {status: 'invalid'});
+      });
+    });
+  });
+});
 
 app.use(apiRouter);
 
