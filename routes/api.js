@@ -49,7 +49,7 @@ router.route('/api')
         'creator_id',
         'assignee_id'
       ],
-      order: [['id', 'DESC']]
+      order: [['priority', 'ASC']]
     })
     .then((data)=>{
       res.json({data: data});
@@ -82,7 +82,7 @@ router.route('/api/:id')
             'creator_id',
             'assignee_id'
           ],
-          order: [['id', 'DESC']]
+          order: [['priority', 'ASC']]
         })
         .then((data)=>{
           res.json({data: data});
@@ -115,7 +115,7 @@ router.route('/api/:id')
         'creator_id',
         'assignee_id'
       ],
-      order: [['id', 'DESC']]
+      order: [['priority', 'ASC']]
     })
     .then((data)=>{
       res.json({data: data});

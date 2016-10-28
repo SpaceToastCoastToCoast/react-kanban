@@ -9,13 +9,15 @@ $hover-color: #A58772;
 $header-shadow-color: #382D26;
 $queue-color: rgba(71, 61, 54, 0.4);
 
-$low-color: #80A080;
-$medium-color: #A0A080;
-$high-color: #A08080;
+$header-height: 48px;
 
 $high-background-color: #FF7A57;
 $medium-background-color: #FF9D57;
 $low-background-color: #FFC276;
+
+$high-gradient-color: #E86440;
+$medium-gradient-color: #E88340;
+$low-gradient-color: #E8AA5F;
 
 html {
   background-color: $dark-color;
@@ -38,7 +40,7 @@ h3 {
   top: 0;
   right: 0;
   width: 100%;
-  height: 48px;
+  height: $header-height;
   padding: 0px;
   display: flex;
   flex-flow: row nowrap;
@@ -58,16 +60,20 @@ h3 {
     }
   }
   div {
-    margin-right: 16px;
+    margin-right: 0px;
     button {
       font-family: 'Coming Soon', sans-serif;
       color: $dark-color;
       font-weight: bold;
-      height: 48px;
-      width: 96px;
+      font-size: 10px;
+      height: $header-height;
+      width: 100%;
       background-color: $header-text-color;
       border: none;
       transition: background-color 0.5s ease;
+      @include respond-to(medium) {
+        font-size: 12px;
+      }
     }
     button:hover {
       background-color: $hover-color;
@@ -77,7 +83,7 @@ h3 {
 
 #newTaskForm {
   box-shadow: 0px 2px 4px $header-shadow-color;
-  position: absolute;
+  position: fixed;
   z-index: 998;
   top: -400px;
   right: 8px;
@@ -115,6 +121,50 @@ form {
   button, select {
     border: 2px outset $header-color;
   }
+}
+
+#navbar {
+  position: fixed;
+  top: 0px;
+  right: 0px;
+  display: flex;
+  margin-top: 0px;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: space-between;
+  width: 416px;
+  max-width: 70%;
+  z-index: 1000;
+  height: $header-height;
+  li {
+    margin-left: 8px;
+    z-index: 1001;
+    width: 96px;
+    list-style-type: none;
+    height: $header-height;
+    background-color: $header-text-color;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    a, a:visited {
+      margin: auto;
+      text-decoration: none;
+      line-height: $header-height;
+      font-size: 10px;
+      font-weight: bold;
+      color: $dark-color;
+      @include respond-to(medium) {
+        font-size: 12px;
+      }
+    }
+  }
+  li:hover {
+    background-color: $hover-color;
+  }
+}
+
+.login, .createUser {
+  width: 250px;
 }
 
 #main {
@@ -156,7 +206,7 @@ form {
   justify-content: space-between;
   h2 {
     font-weight: lighter;
-    font-size: 32px;
+    font-size: 30px;
     font-family: 'Righteous', sans-serif;
     color: $header-text-color;
     text-shadow: 0 0 4px $header-shadow-color, 1px 2px 2px $header-shadow-color;
@@ -214,6 +264,7 @@ form {
 
 .LOW {
   background-color: $low-background-color;
+  background: linear-gradient($low-background-color, $low-gradient-color, $low-background-color);
   button {
     margin: 4px;
     transform: rotate(15deg);
@@ -227,6 +278,7 @@ form {
 
 .MEDIUM {
   background-color: $medium-background-color;
+  background: linear-gradient($medium-background-color, $medium-gradient-color, $medium-background-color);
   button {
     margin: 4px;
     transform: rotate(15deg);
@@ -240,6 +292,7 @@ form {
 
 .HIGH{
   background-color: $high-background-color;
+  background: linear-gradient($high-background-color, $high-gradient-color, $high-background-color);
   button {
     margin: 4px;
     transform: rotate(15deg);

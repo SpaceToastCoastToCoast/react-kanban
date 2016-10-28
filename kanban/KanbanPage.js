@@ -1,5 +1,6 @@
 import React from 'react';
-import KanbanHeader from './KanbanHeader';
+import {connect} from 'react-redux';
+import {receiveCards} from '../actions/kanbanActions.js'
 import NewTaskForm from './NewTaskForm';
 import KanbanQueue from './KanbanQueue';
 
@@ -7,21 +8,14 @@ class KanbanPage extends React.Component {
   constructor() {
     super();
 
-    this.state = {
-      data: []
-    };
-
     this.onApiData = this.onApiData.bind(this);
-
-    this.postAction = this.loadApiData.bind(this);
   }
 
   onApiData(data) {
+    const { dispatch } = this.props;
     const parsedKanbanData = JSON.parse(data.currentTarget.response).data;
     console.log("parsed data", parsedKanbanData);
-    //this will avoid overwriting the existing data with "undefined"
-    //in case of error response from server
-    this.setState({data: parsedKanbanData || this.state.data});
+    dispatch(receiveCards(parsedKanbanData));
   }
 
   onApiError(error) {
@@ -43,28 +37,19 @@ class KanbanPage extends React.Component {
   render() {
     return (
       <div id="kanbanPage">
-        <KanbanHeader />
         <NewTaskForm
-        postTo={this.postAction}
-        apiAddress={this.props.apiAddress}
         />
         <div id="main">
           <KanbanQueue
-            data={this.state.data}
-            postTo={this.postAction}
-            apiAddress={this.props.apiAddress}
+            data={this.props.data}
             listType="TO_DO"
           />
           <KanbanQueue
-            data={this.state.data}
-            postTo={this.postAction}
-            apiAddress={this.props.apiAddress}
+            data={this.props.data}
             listType="DOING"
           />
           <KanbanQueue
-            data={this.state.data}
-            postTo={this.postAction}
-            apiAddress={this.props.apiAddress}
+            data={this.props.data}
             listType="DONE"
           />
         </div>
@@ -74,11 +59,16 @@ class KanbanPage extends React.Component {
 }
 
 KanbanPage.defaultProps = {
-  data: []
-}
-
-KanbanPage.defaultProps = {
   data: React.PropTypes.array
 }
 
-export default KanbanPage;
+const mapStateToProps = (state, ownProps) => {
+  const {kanbanCardReducer} = state;
+  return {
+    data: kanbanCardReducer.toJS()
+  }
+}
+
+export default connect(
+  mapStateToProps
+)(KanbanPage);

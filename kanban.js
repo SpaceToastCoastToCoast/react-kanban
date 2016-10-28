@@ -87,6 +87,24 @@ const isAuthenticated = (req, res, next) => {
   }
 };
 
+app.get('/login', (req, res) => {
+  res.render('login', {
+    status: 'valid',
+    //failureMsg: req.flash('error')[0]
+  });
+});
+
+app.get('/logout', (req, res) => {
+  req.logout();
+  res.redirect('/');
+});
+
+app.post('/login', passport.authenticate('local', {
+    successRedirect: '/gallery',
+    failureRedirect: '/login',
+    //failureFlash: 'Invalid login'
+}));
+
 app.use(apiRouter);
 
 // Check to see what dev environment we are in

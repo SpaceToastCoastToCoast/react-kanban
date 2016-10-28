@@ -1,4 +1,6 @@
 import React from 'react';
+import {receiveCards} from '../actions/kanbanActions.js'
+import {connect} from 'react-redux';
 
 class KanbanItem extends React.Component {
   changeProperty(prop) {
@@ -20,34 +22,52 @@ class KanbanItem extends React.Component {
     }
   }
 
+  onApiData(data) {
+    const { dispatch } = this.props;
+    const parsedKanbanData = JSON.parse(data.currentTarget.response).data;
+    console.log("parsed data", parsedKanbanData);
+    dispatch(receiveCards(parsedKanbanData));
+  }
+
   updatePriority(e, props) {
     e.preventDefault();
     const oReq = new XMLHttpRequest();
-    oReq.addEventListener('load', props.postTo);
-    oReq.open("PUT", `${props.apiAddress}/${props.itemId}`);
+    oReq.addEventListener('load', this.onApiData.bind(this));
+    oReq.open("PUT", `http://localhost:3000/api/${this.props.itemId}`);
     oReq.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-    oReq.send(`priority=${this.changeProperty(props.priority)}`);
+    oReq.send(`priority=${this.changeProperty(this.props.priority)}`);
   }
 
   updateStatus(e, props) {
     e.preventDefault();
     const oReq = new XMLHttpRequest();
-    oReq.addEventListener('load', props.postTo);
-    oReq.open("PUT", `${props.apiAddress}/${props.itemId}`);
+    oReq.addEventListener('load', this.onApiData.bind(this));
+    oReq.open("PUT", `http://localhost:3000/api/${this.props.itemId}`);
     oReq.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-    oReq.send(`status=${this.changeProperty(props.status)}`);
+    oReq.send(`status=${this.changeProperty(this.props.status)}`);
   }
 
   render() {
+    this.updatePriority = this.updatePriority.bind(this);
+    this.updateStatus = this.updateStatus.bind(this);
     return (
       <div className={`${this.props.className} ${this.props.priority} kanbanItem`}>
         <h3>{this.props.title}</h3>
         <p>{this.props.description}</p>
-        <p>Priority: {this.props.priority} <button onClick={(e, props) => {this.updatePriority(e, this.props)}}>Update</button></p>
-        <p>Status: {this.props.status} <button onClick={(e, props) => {this.updateStatus(e, this.props)}}>Update</button></p>
+        <p>Priority: {this.props.priority} <button onClick={(e) => {this.updatePriority(e)}}>Update</button></p>
+        <p>Status: {this.props.status} <button onClick={(e) => {this.updateStatus(e)}}>Update</button></p>
       </div>
     )
   }
 }
 
-export default KanbanItem;
+const mapStateToProps = (state, ownProps) => {
+  const {kanbanCardReducer} = state;
+  return {
+    data: kanbanCardReducer.toJS()
+  }
+}
+
+export default connect(
+  mapStateToProps
+)(KanbanItem);

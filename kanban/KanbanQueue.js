@@ -1,4 +1,5 @@
 import React from 'react';
+import {connect} from 'react-redux';
 import KanbanItem from './KanbanItem';
 
 class KanbanQueue extends React.Component {
@@ -44,4 +45,13 @@ class KanbanQueue extends React.Component {
   }
 }
 
-export default KanbanQueue;
+const mapStateToProps = (state, ownProps) => {
+  const {kanbanCardReducer} = state;
+  return {
+    data: kanbanCardReducer.toJS()
+  }
+}
+
+export default connect(
+  mapStateToProps
+)(KanbanQueue);
