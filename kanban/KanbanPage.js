@@ -19,7 +19,9 @@ class KanbanPage extends React.Component {
   onApiData(data) {
     const parsedKanbanData = JSON.parse(data.currentTarget.response).data;
     console.log("parsed data", parsedKanbanData);
-    this.setState({data: parsedKanbanData});
+    //this will avoid overwriting the existing data with "undefined"
+    //in case of error response from server
+    this.setState({data: parsedKanbanData || this.state.data});
   }
 
   onApiError(error) {

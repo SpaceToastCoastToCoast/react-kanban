@@ -3,6 +3,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const CONFIG = require('./config/config.json');
+const log = require ('./middleware/log');
 const app = express();
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
@@ -19,6 +20,8 @@ const webpack = require('webpack');
 const webpackMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
 const config = require('./webpack.config.js');
+
+const apiRouter = require('./routes/api')
 
 const priority = {
   high: 'HIGH',
@@ -37,6 +40,7 @@ app.use(session({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(log);
 
 const ls = new LocalStrategy((username, password, done) => {
   User.findAll({
@@ -83,64 +87,11 @@ const isAuthenticated = (req, res, next) => {
   }
 };
 
+app.use(apiRouter);
+
 // Check to see what dev environment we are in
 const isDeveloping = process.env.NODE_ENV !== 'production';
 const port = isDeveloping ? 3000 : process.env.PORT;
-
-app.get('/api', (req, res) => {
-  Card.findAll({
-    order: [['priority', 'ASC']]
-  })
-  .then((data)=>{
-    res.json({data: data});
-  });
-});
-
-app.post('/api', (req, res) => {
-  Card.create({
-    title: req.body.title,
-    description: req.body.description,
-    priority: req.body.priority,
-    status: req.body.status,
-    creator_id: 1,
-    assignee_id: 1 })
-  .then(() => {
-    console.log("posted");
-    Card.findAll({
-      order: [['id', 'DESC']]
-    })
-    .then((data)=>{
-      res.json({data: data});
-    });
-  })
-  .catch((error) => {
-    console.error(error);
-  });
-});
-
-app.put('/api/:id', (req, res) => {
-  console.log('req.params.id', req.params.id);
-  console.log('req.body', req.body);
-  Card.findById(parseInt(req.params.id))
-  .then((card) => {
-    console.log('card', card);
-    card.update({
-      priority: req.body.priority || card.priority,
-      status: req.body.status || card.status
-    })
-    .then(() => {
-      Card.findAll({
-        order: [['id', 'DESC']]
-      })
-      .then((data)=>{
-        res.json({data: data});
-      });
-    });
-  })
-  .catch((error) => {
-    console.error(error);
-  });
-});
 
 if (isDeveloping) {
   app.set('host', 'http://localhost');
