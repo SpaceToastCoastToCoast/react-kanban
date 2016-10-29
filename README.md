@@ -1,4 +1,9 @@
-# react-kanban
+react-kanban
+===============
+
+Express, Sequelize, HTML5, React and Redux, stored on PostgreSQL
+
+---
 
 An interactive kanban board for assigning tasks to users. Tasks have a title, a short description, a progress status, a priority, a task creator and an assignee. This board displays tasks in an easy to read visual format.
 
@@ -11,4 +16,4 @@ Tasks are placed in the TO DO column on creation, and their progress can be upda
 - Create a config.json in the config directory and make it look like the example provided. Point the username, password and database to your postgres database.
 - Run `node kanban.js`. Exit the process once webpack build finishes.
 - Run `sequelize db:seed:all`
-- Run `node kanban.js` agan and navigate to `http://localhost:3000`
+- Run `node kanban.js` again and navigate to `http://localhost:3000`
