@@ -45,7 +45,7 @@ app.use(log);
 
 const ls = new LocalStrategy((username, password, done) => {
   User.findAll({
-    attributes: ['username', 'password', 'id'],
+    attributes: ['username', 'password', 'role', 'id'],
     where: {
       username: username
     }

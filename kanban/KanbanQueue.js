@@ -20,15 +20,14 @@ class KanbanQueue extends React.Component {
     const queueItems = this.props.data.filter((dataItem) => {
       return dataItem.status === this.props.listType;
     }).map((queueItem) => {
-      console.log(queueItem);
       return (
         <KanbanItem
           title={queueItem.title}
           description={queueItem.description}
           priority={queueItem.priority}
           status={queueItem.status}
-          createdBy={queueItem.creator_id}
-          assignedTo={queueItem.User.username}
+          createdBy={queueItem.creator.username}
+          assignedTo={queueItem.assignee.username}
           key={queueItem.id}
           itemId={queueItem.id}
           postTo={this.props.postTo}

@@ -5,8 +5,7 @@ const db = require('../models');
 const Card = db.Card;
 const User = db.User;
 
-router.route('/api')
-.get((req, res) => {
+getAllCards = (req, res)=> {
   Card.findAll({
     attributes: [
       'id',
@@ -16,19 +15,38 @@ router.route('/api')
       'status',
       'creator_id',
       'assignee_id',
-      'User.username'
+      'creator.username',
+      'assignee.username'
     ],
     order: [['priority', 'ASC']],
-    include: [{model: User, attributes: ['id', 'username']}]
+    include: [
+      {
+        model: User,
+        as: 'creator',
+        attributes: ['id', 'username']
+      }, {
+        model: User,
+        as: 'assignee',
+        attributes: ['id', 'username']
+      }
+    ]
   })
   .then((data)=>{
     res.json({data: data});
-  });
+  })
+  .catch((err) => {
+    throw new Error("Error querying database!");
+  })
+}
+
+router.route('/api')
+.get((req, res) => {
+  getAllCards(req, res);
 })
 .post((req, res) => {
   let userID;
   if(req.user !== undefined) {
-    userID = req.user.id;
+    userID = req.body.creator_id;
   } else {
     userID = 1;
   }
@@ -40,22 +58,7 @@ router.route('/api')
     creator_id: userID,
     assignee_id: req.body.assignee_id })
   .then(() => {
-    console.log("posted");
-    Card.findAll({
-      attributes: [
-        'id',
-        'title',
-        'description',
-        'priority',
-        'status',
-        'creator_id',
-        'assignee_id'
-      ],
-      order: [['priority', 'ASC']]
-    })
-    .then((data)=>{
-      res.json({data: data});
-    });
+    getAllCards(req, res);
   })
   .catch((error) => {
     console.error(error);
@@ -74,21 +77,7 @@ router.route('/api/:id')
         status: req.body.status || card.status
       })
       .then(() => {
-        Card.findAll({
-          attributes: [
-            'id',
-            'title',
-            'description',
-            'priority',
-            'status',
-            'creator_id',
-            'assignee_id'
-          ],
-          order: [['priority', 'ASC']]
-        })
-        .then((data)=>{
-          res.json({data: data});
-        });
+        getAllCards(req, res);
       })
       .catch((error) => {
         res.status(400).json({
@@ -107,21 +96,7 @@ router.route('/api/:id')
   Card.findById(parseInt(req.params.id))
   .then((card) => {
     card.destroy();
-    Card.findAll({
-      attributes: [
-        'id',
-        'title',
-        'description',
-        'priority',
-        'status',
-        'creator_id',
-        'assignee_id'
-      ],
-      order: [['priority', 'ASC']]
-    })
-    .then((data)=>{
-      res.json({data: data});
-    });
+    getAllCards(req, res);
   })
   .catch((error) => {
     console.error(error);

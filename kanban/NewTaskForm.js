@@ -7,24 +7,22 @@ class NewTaskForm extends React.Component {
   onApiData(data) {
     const { dispatch } = this.props;
     const parsedKanbanData = JSON.parse(data.currentTarget.response).data;
-    console.log("parsed data", parsedKanbanData);
     dispatch(receiveCards(parsedKanbanData));
   }
 
   formHandler(e) {
     e.preventDefault();
-    console.log(this.props);
     const oReq = new XMLHttpRequest();
     oReq.addEventListener('load', this.onApiData.bind(this));
     oReq.open("POST", "http://localhost:3000/api");
     oReq.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-    oReq.send(`title=${this.refs.title.value}&description=${this.refs.description.value}&priority=${this.refs.priority.value}&status=TO_DO&assignee_id=${this.refs.assignee_id.value}`);
+    oReq.send(`title=${this.refs.title.value}&description=${this.refs.description.value}&priority=${this.refs.priority.value}&status=TO_DO&creator_id=${this.props.userID}&assignee_id=${this.refs.assignee_id.value}`);
   }
 
   render() {
     const assignees = this.props.users.map((dataItem, index) => {
       return (
-        <option key={index} value={dataItem.uid}>Assign: {dataItem.username}</option>
+        <option key={index} value={dataItem.id}>Assign: {dataItem.username}</option>
       )
     })
     return (

@@ -22,7 +22,14 @@ module.exports = function(sequelize, DataTypes) {
   }, {
     classMethods: {
       associate: function(models) {
-        User.hasMany(models.Card);
+        User.hasMany(models.Card, {
+          as: 'creator',
+          foreignKey: 'creator_id'
+        });
+        User.hasMany(models.Card, {
+          as: 'assignee',
+          foreignKey: 'assignee_id'
+        });
       }
     },
   });

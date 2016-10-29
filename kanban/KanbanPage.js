@@ -15,14 +15,12 @@ class KanbanPage extends React.Component {
   onApiData(data) {
     const { dispatch } = this.props;
     const parsedKanbanData = JSON.parse(data.currentTarget.response).data;
-    console.log("parsed data", parsedKanbanData);
     dispatch(receiveCards(parsedKanbanData));
   }
 
   onUserData(data) {
     const { dispatch } = this.props;
     const parsedUserData = JSON.parse(data.currentTarget.response).users;
-    console.log("parsed data", parsedUserData);
     dispatch(receiveUsers(parsedUserData));
   }
 

@@ -25,7 +25,6 @@ class KanbanItem extends React.Component {
   onApiData(data) {
     const { dispatch } = this.props;
     const parsedKanbanData = JSON.parse(data.currentTarget.response).data;
-    console.log("parsed data", parsedKanbanData);
     dispatch(receiveCards(parsedKanbanData));
   }
 
@@ -54,6 +53,7 @@ class KanbanItem extends React.Component {
       <div className={`${this.props.className} ${this.props.priority} kanbanItem`}>
         <h3>{this.props.title}</h3>
         <p>{this.props.description}</p>
+        <p>Created by: {this.props.createdBy}</p>
         <p>Assigned to: {this.props.assignedTo}</p>
         <p>Priority: {this.props.priority} <button onClick={(e) => {this.updatePriority(e)}}>Update</button></p>
         <p>Status: {this.props.status} <button onClick={(e) => {this.updateStatus(e)}}>Update</button></p>

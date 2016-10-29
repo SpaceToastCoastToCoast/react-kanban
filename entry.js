@@ -12,9 +12,6 @@ import KanbanClient from './kanban/KanbanClient.js';
 const reducer = combineReducers(reducers);
 const store = createStore(reducer);
 
-const initialState = store.getState();
-console.log('initialState', initialState);
-
 ReactDOM.render(
   <Provider store={store} >
     <Router history={hashHistory} >
