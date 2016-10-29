@@ -165,6 +165,17 @@ app.post('/users', validate.userValidate, (req, res) => {
   });
 });
 
+app.get('/users', (req, res) => {
+  User.findAll({
+    attributes: ['username', 'role', 'id']
+  })
+  .then((users) => {
+    res.json({
+      users: users
+    })
+  })
+})
+
 app.use(apiRouter);
 
 // Check to see what dev environment we are in

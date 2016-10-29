@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {receiveCards} from '../actions/kanbanActions.js'
+import {receiveCards, receiveUsers} from '../actions/kanbanActions.js'
 import NewTaskForm from './NewTaskForm';
 import KanbanQueue from './KanbanQueue';
 
@@ -9,6 +9,7 @@ class KanbanPage extends React.Component {
     super();
 
     this.onApiData = this.onApiData.bind(this);
+    this.onUserData = this.onUserData.bind(this);
   }
 
   onApiData(data) {
@@ -18,20 +19,28 @@ class KanbanPage extends React.Component {
     dispatch(receiveCards(parsedKanbanData));
   }
 
+  onUserData(data) {
+    const { dispatch } = this.props;
+    const parsedUserData = JSON.parse(data.currentTarget.response).users;
+    console.log("parsed data", parsedUserData);
+    dispatch(receiveUsers(parsedUserData));
+  }
+
   onApiError(error) {
     console.error("error:", error);
   }
 
-  loadApiData() {
+  loadApiData(address, loadListener) {
     const oReq = new XMLHttpRequest();
-    oReq.addEventListener("load", this.onApiData);
+    oReq.addEventListener("load", loadListener);
     oReq.addEventListener("error", this.onApiError);
-    oReq.open("GET", this.props.apiAddress);
+    oReq.open("GET", address);
     oReq.send();
   }
 
   componentWillMount() {
-    this.loadApiData();
+    this.loadApiData(this.props.apiAddress, this.onApiData);
+    this.loadApiData("http://localhost:3000/users", this.onUserData);
   }
 
   render() {

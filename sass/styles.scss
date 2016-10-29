@@ -282,9 +282,21 @@ form {
   }
 }
 
+#kanbanPage {
+  #main {
+    flex-flow: column nowrap;
+    align-items: center;
+    @include respond-to(small) {
+      flex-flow: row nowrap;
+      align-items: flex-start;
+      justify-content: space-between;
+    }
+  }
+}
+
 .column {
-  width: 30%;
-  max-width: 30%;
+  width: 100%;
+  max-width: 100%;
   box-sizing: border-box;
   margin: 4px;
   padding: 8px;
@@ -294,6 +306,10 @@ form {
   flex-flow: column nowrap;
   align-items: center;
   justify-content: space-between;
+  @include respond-to(small) {
+    width: 30%;
+    max-width: 30%;
+  }
   h2 {
     font-weight: lighter;
     font-size: 30px;

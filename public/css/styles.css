@@ -265,10 +265,21 @@ form {
     #main {
       width: 850px; } }
 
-/* line 285, /home/alan/DevLeague/react-kanban/sass/styles.scss */
+/* line 286, /home/alan/DevLeague/react-kanban/sass/styles.scss */
+#kanbanPage #main {
+  flex-flow: column nowrap;
+  align-items: center; }
+  @media (min-width: 600px) {
+    /* line 286, /home/alan/DevLeague/react-kanban/sass/styles.scss */
+    #kanbanPage #main {
+      flex-flow: row nowrap;
+      align-items: flex-start;
+      justify-content: space-between; } }
+
+/* line 297, /home/alan/DevLeague/react-kanban/sass/styles.scss */
 .column {
-  width: 30%;
-  max-width: 30%;
+  width: 100%;
+  max-width: 100%;
   box-sizing: border-box;
   margin: 4px;
   padding: 8px;
@@ -278,7 +289,12 @@ form {
   flex-flow: column nowrap;
   align-items: center;
   justify-content: space-between; }
-  /* line 297, /home/alan/DevLeague/react-kanban/sass/styles.scss */
+  @media (min-width: 600px) {
+    /* line 297, /home/alan/DevLeague/react-kanban/sass/styles.scss */
+    .column {
+      width: 30%;
+      max-width: 30%; } }
+  /* line 313, /home/alan/DevLeague/react-kanban/sass/styles.scss */
   .column h2 {
     font-weight: lighter;
     font-size: 30px;
@@ -288,7 +304,7 @@ form {
     margin-top: 0px;
     margin-bottom: 8px; }
 
-/* line 308, /home/alan/DevLeague/react-kanban/sass/styles.scss */
+/* line 324, /home/alan/DevLeague/react-kanban/sass/styles.scss */
 .kanbanItem {
   border-radius: 2px;
   width: 100%;
@@ -300,35 +316,35 @@ form {
   box-sizing: border-box;
   box-shadow: 0px 1px 2px #382D26;
   transition: position 0.5s ease, margin 0.5s ease, padding 0.5s ease, width 0.5s ease, box-shadow 0.5s ease; }
-  /* line 318, /home/alan/DevLeague/react-kanban/sass/styles.scss */
+  /* line 334, /home/alan/DevLeague/react-kanban/sass/styles.scss */
   .kanbanItem p {
     margin: 0px;
     padding: 4px;
     font-size: 12px; }
     @media (min-width: 600px) {
-      /* line 318, /home/alan/DevLeague/react-kanban/sass/styles.scss */
+      /* line 334, /home/alan/DevLeague/react-kanban/sass/styles.scss */
       .kanbanItem p {
         font-size: 14px; } }
     @media (min-width: 900px) {
-      /* line 318, /home/alan/DevLeague/react-kanban/sass/styles.scss */
+      /* line 334, /home/alan/DevLeague/react-kanban/sass/styles.scss */
       .kanbanItem p {
         font-size: 16px; } }
-  /* line 330, /home/alan/DevLeague/react-kanban/sass/styles.scss */
+  /* line 346, /home/alan/DevLeague/react-kanban/sass/styles.scss */
   .kanbanItem h3 {
     margin: 0px;
     margin-bottom: 8px;
     padding: 4px;
     font-size: 16px; }
     @media (min-width: 600px) {
-      /* line 330, /home/alan/DevLeague/react-kanban/sass/styles.scss */
+      /* line 346, /home/alan/DevLeague/react-kanban/sass/styles.scss */
       .kanbanItem h3 {
         font-size: 20px; } }
     @media (min-width: 900px) {
-      /* line 330, /home/alan/DevLeague/react-kanban/sass/styles.scss */
+      /* line 346, /home/alan/DevLeague/react-kanban/sass/styles.scss */
       .kanbanItem h3 {
         font-size: 24px; } }
 
-/* line 345, /home/alan/DevLeague/react-kanban/sass/styles.scss */
+/* line 361, /home/alan/DevLeague/react-kanban/sass/styles.scss */
 .kanbanItem:hover {
   width: 110%;
   padding-top: 4px;
@@ -338,12 +354,12 @@ form {
   margin: 0px;
   box-shadow: 0 2px 4px #382D26; }
 
-/* line 355, /home/alan/DevLeague/react-kanban/sass/styles.scss */
+/* line 371, /home/alan/DevLeague/react-kanban/sass/styles.scss */
 .LOW {
   background-color: #FFC276;
   border-top: 1px solid #FFC276;
   background: linear-gradient(#E8AA5F, #FFC276); }
-  /* line 359, /home/alan/DevLeague/react-kanban/sass/styles.scss */
+  /* line 375, /home/alan/DevLeague/react-kanban/sass/styles.scss */
   .LOW button {
     margin: 4px;
     transform: rotate(15deg);
@@ -353,12 +369,12 @@ form {
     font-family: 'Coming Soon', sans-serif;
     color: #473d36; }
 
-/* line 370, /home/alan/DevLeague/react-kanban/sass/styles.scss */
+/* line 386, /home/alan/DevLeague/react-kanban/sass/styles.scss */
 .MEDIUM {
   background-color: #FF9D57;
   border-top: 1px solid #FF9D57;
   background: linear-gradient(#E88340, #FF9D57); }
-  /* line 374, /home/alan/DevLeague/react-kanban/sass/styles.scss */
+  /* line 390, /home/alan/DevLeague/react-kanban/sass/styles.scss */
   .MEDIUM button {
     margin: 4px;
     transform: rotate(15deg);
@@ -368,12 +384,12 @@ form {
     font-family: 'Coming Soon', sans-serif;
     color: #473d36; }
 
-/* line 385, /home/alan/DevLeague/react-kanban/sass/styles.scss */
+/* line 401, /home/alan/DevLeague/react-kanban/sass/styles.scss */
 .HIGH {
   background-color: #FF7A57;
   border-top: 1px solid #FF7A57;
   background: linear-gradient(#E86440, #FF7A57); }
-  /* line 389, /home/alan/DevLeague/react-kanban/sass/styles.scss */
+  /* line 405, /home/alan/DevLeague/react-kanban/sass/styles.scss */
   .HIGH button {
     margin: 4px;
     transform: rotate(15deg);

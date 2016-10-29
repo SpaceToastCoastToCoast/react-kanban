@@ -18,10 +18,15 @@ class NewTaskForm extends React.Component {
     oReq.addEventListener('load', this.onApiData.bind(this));
     oReq.open("POST", "http://localhost:3000/api");
     oReq.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-    oReq.send(`title=${this.refs.title.value}&description=${this.refs.description.value}&priority=${this.refs.priority.value}&status=${this.refs.status.value}`);
+    oReq.send(`title=${this.refs.title.value}&description=${this.refs.description.value}&priority=${this.refs.priority.value}&status=TO_DO&assignee_id=${this.refs.assignee_id.value}`);
   }
 
   render() {
+    const assignees = this.props.users.map((dataItem, index) => {
+      return (
+        <option key={index} value={dataItem.uid}>Assign: {dataItem.username}</option>
+      )
+    })
     return (
       <div id="newTaskForm">
       <form method="post" id="taskForm" action="/api" onSubmit={(e)=> {this.formHandler = this.formHandler.bind(this); this.formHandler(e);}}>
@@ -32,10 +37,8 @@ class NewTaskForm extends React.Component {
           <option value="2 MEDIUM">MEDIUM</option>
           <option value="1 HIGH">HIGH</option>
         </select>
-        <select name="status" ref="status">
-          <option value="TO_DO">TO DO</option>
-          <option value="DOING">DOING</option>
-          <option value="DONE">DONE</option>
+        <select name="assignee_id" ref="assignee_id">
+          { assignees }
         </select>
         <button type="submit">Submit</button>
       </form>
@@ -45,11 +48,13 @@ class NewTaskForm extends React.Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-  const {kanbanCardReducer, loginReducer} = state;
+  const {kanbanCardReducer, loginReducer, userReducer} = state;
   return {
     data: kanbanCardReducer.toJS(),
     login: loginReducer.toJS().login,
-    userID: loginReducer.toJS().uid
+    userID: loginReducer.toJS().uid,
+    role: loginReducer.toJS().role,
+    users: userReducer.toJS()
   }
 }
 

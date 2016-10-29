@@ -15,9 +15,11 @@ router.route('/api')
       'priority',
       'status',
       'creator_id',
-      'assignee_id'
+      'assignee_id',
+      'User.username'
     ],
-    order: [['priority', 'ASC']]
+    order: [['priority', 'ASC']],
+    include: [{model: User, attributes: ['id', 'username']}]
   })
   .then((data)=>{
     res.json({data: data});
@@ -36,7 +38,7 @@ router.route('/api')
     priority: req.body.priority,
     status: req.body.status,
     creator_id: userID,
-    assignee_id: 1 })
+    assignee_id: req.body.assignee_id })
   .then(() => {
     console.log("posted");
     Card.findAll({
