@@ -6,7 +6,7 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <KanbanHeader />
+        <KanbanHeader pathname={this.props.location.pathname}/>
         <div>
           {this.props.children}
         </div>

@@ -10,6 +10,7 @@ module.exports = {
       {
         username: 'kanbanadmin',
         password: bcrypt.hashSync(admin_password, salt),
+        role: 'ADMIN',
         createdAt: new Date(),
         updatedAt: new Date()
       }

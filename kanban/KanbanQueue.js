@@ -46,9 +46,12 @@ class KanbanQueue extends React.Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-  const {kanbanCardReducer} = state;
+  const {kanbanCardReducer, loginReducer} = state;
   return {
-    data: kanbanCardReducer.toJS()
+    data: kanbanCardReducer.toJS(),
+    login: loginReducer.toJS().login,
+    role: loginReducer.toJS().role,
+    uid: loginReducer.toJS().uid
   }
 }
 

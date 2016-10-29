@@ -1,4 +1,6 @@
 import React from 'react';
+import {connect} from 'react-redux';
+import {logIn, logOut} from '../../actions/loginActions.js'
 
 const FormTypes = {
   login: "login",
@@ -8,16 +10,30 @@ const FormTypes = {
 class LoginForm extends React.Component {
 
   onUserAction(response) {
-    console.log(response.currentTarget.response);
-    const errorMessage = JSON.parse(response.currentTarget.response).error;
+    const { dispatch } = this.props;
+    let errorMessage = JSON.parse(response.currentTarget.response).error;
+    console.log(errorMessage);
+    if(errorMessage === undefined) {
+      errorMessage = "";
+    }
     const loginMessage = JSON.parse(response.currentTarget.response).login;
     document.getElementById("flashMessage").innerHTML = errorMessage;
-    if(errorMessage === undefined) {
+    if(errorMessage === undefined || errorMessage === "") {
     //successful redirect
       if(loginMessage !== undefined) {
-        this.context.router.push("http://localhost:3000/#/");
+        this.context.router.push("/");
+        dispatch(logIn(loginMessage));
+      } else {
+        dispatch(logOut(loginMessage));
       }
     }
+  }
+
+  logOutButton() {
+    const oReq = new XMLHttpRequest();
+    oReq.addEventListener('load', this.onUserAction.bind(this));
+    oReq.open("GET", 'http://localhost:3000/logout');
+    oReq.send();
   }
 
   formHandler(e, location) {
@@ -35,8 +51,8 @@ class LoginForm extends React.Component {
     let FormTitle;
     let loggedInBlock;
 
-    if(this.props.username !== undefined) {
-      loggedInBlock = <p>Logged in as {this.props.username} <button>Logout</button></p>
+    if(this.props.login !== undefined) {
+      loggedInBlock = <p>Logged in as {this.props.login} <button onClick={()=> {this.logOutButton = this.logOutButton.bind(this); this.logOutButton();}}>Logout</button></p>
     } else {
       loggedInBlock = <p>Not logged in</p>
     }
@@ -72,4 +88,16 @@ LoginForm.contextTypes = {
   router: React.PropTypes.object
 }
 
-export default LoginForm;
+const mapStateToProps = (state, ownProps) => {
+  const {kanbanCardReducer, loginReducer} = state;
+  return {
+    data: kanbanCardReducer.toJS(),
+    login: loginReducer.toJS().login,
+    role: loginReducer.toJS().role,
+    uid: loginReducer.toJS().uid
+  }
+}
+
+export default connect(
+  mapStateToProps
+)(LoginForm);

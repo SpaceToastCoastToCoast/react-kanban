@@ -1,5 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router';
+import {connect} from 'react-redux';
 
 class KanbanHeader extends React.Component {
   revealNewPost() {
@@ -20,7 +21,11 @@ class KanbanHeader extends React.Component {
             <li><Link to='/login'>Login</Link></li>
             <li><Link to='/newBoard'>New Board</Link></li>
             <li><Link to='/'>Main Board</Link></li>
-            <li><button onClick={this.revealNewPost}>New Task</button></li>
+            {function(){
+              if (this.props.pathname !== '/login') {
+                return <li><button onClick={this.revealNewPost}>New Task</button></li>
+              }
+            }.call(this)}
           </ul>
         </div>
       </div>
@@ -28,4 +33,16 @@ class KanbanHeader extends React.Component {
   }
 }
 
-export default KanbanHeader;
+const mapStateToProps = (state, ownProps) => {
+  const {kanbanCardReducer, loginReducer} = state;
+  return {
+    data: kanbanCardReducer.toJS(),
+    login: loginReducer.toJS().login,
+    role: loginReducer.toJS().role,
+    uid: loginReducer.toJS().uid
+  }
+}
+
+export default connect(
+  mapStateToProps
+)(KanbanHeader);

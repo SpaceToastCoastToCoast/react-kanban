@@ -58,6 +58,7 @@ const ls = new LocalStrategy((username, password, done) => {
     if(res === true) {
       return done(null, {
         username: u.dataValues.username,
+        role: u.dataValues.role,
         id: u.dataValues.id
       });
     } else {
@@ -83,6 +84,7 @@ passport.use(ls);
 const isAuthenticated = (req, res, next) => {
   if(!req.isAuthenticated()) {
     return res.json({
+      error: "Must log in",
       login: undefined
     });
   } else {
@@ -91,49 +93,73 @@ const isAuthenticated = (req, res, next) => {
 };
 
 app.get('/login', (req, res) => {
-  let username;
   if(req.user !== undefined) {
-    username = req.user.username;
+    res.json({
+      check: "hit",
+      login: req.username,
+      uid: req.user.id,
+      role: req.user.role
+    })
   } else {
-    username = undefined;
+    res.json({
+      check: "hit",
+      login: undefined
+    })
   }
-  res.json({
-    check: "hit",
-    login: username
-  })
+
 });
 
 app.get('/logout', (req, res) => {
   req.logout();
-});
-
-app.post('/login', passport.authenticate('local'), (req, res) => {
-  let username;
-  if(req.user !== undefined) {
-    username = req.user.username;
-  } else {
-    username = undefined;
-  }
   res.json({
-    check: "hit POST",
-    login: username
+    logout: "success",
+    login: undefined
   })
 });
 
+app.post('/login', (req, res, next) => {
+  passport.authenticate('local', (err, user, info) => {
+    if(err) {
+      //500 Internal Server Error
+      return next(err);
+    }
+    if(!user) {
+      return res.status(401).json({
+        error: "Login failed"
+      });
+    } else {
+      req.login(user, (loginErr) => {
+        if(loginErr) {
+          return next(loginErr);
+        }
+      })
+      return res.json({
+        check: "hit POST",
+        login: user.username,
+        role: user.role,
+        uid: user.id
+      })
+    }
+  })(req, res, next);
+});
+
 app.post('/users', validate.userValidate, (req, res) => {
-  //to create a new gallery photo
+  //to create a new user
   bcrypt.genSalt(10, (err, salt) => {
     bcrypt.hash(req.body.password, salt, (err, hash) => {
       User.create({ username: req.body.username,
         password: hash,
-        emailaddress: req.body.email,
         role: 'USER'})
       .then((user) => {
-        res.render('login', {status: 'valid'});
+        res.json({
+          success: true
+        });
       })
       .catch((err) => {
         //req.flash('info', 'Invalid input in user account fields');
-        res.render('login', {status: 'invalid'});
+        res.json({
+          error: "Invalid username or password"
+        });
       });
     });
   });
