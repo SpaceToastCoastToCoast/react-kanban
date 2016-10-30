@@ -18,7 +18,13 @@ class KanbanHeader extends React.Component {
         <h1>Kanban</h1>
         <div>
           <ul role='nav' id="navbar">
-            <li><Link to='/login'>Login</Link></li>
+            <li><Link to='/login'>{function(){
+              if(this.props.login !== undefined) {
+                return "Logout";
+              } else {
+                return "Login";
+              }
+            }.call(this)}</Link></li>
             <li><Link to='/newBoard'>New Board</Link></li>
             <li><Link to='/'>Main Board</Link></li>
             {function(){
