@@ -14,6 +14,7 @@ Tasks are placed in the TO DO column on creation, and their progress can be upda
 - Create a user in postgres. (e.g. `kanban_admin`)
 - Create a database for the project and assign ownership to the new user. (e.g. `kanban_db`)
 - Create a config.json in the config directory and make it look like the example provided. Point the username, password and database to your postgres database.
+- `npm install`
 - Run `node kanban.js`. Exit the process once webpack build finishes.
 - Run `sequelize db:seed:all`
 - Run `node kanban.js` again and navigate to `http://localhost:3000`
