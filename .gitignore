@@ -6,3 +6,5 @@ node_modules
 **/dump.rdb
 
 *.log
+
+**/gulpfile.js
