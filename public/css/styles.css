@@ -1,19 +1,242 @@
 @import url("https://fonts.googleapis.com/css?family=Coming+Soon|Righteous");
-/* line 22, /home/alan/DevLeague/react-kanban/sass/styles.scss */
+
+.login, .createUser {
+  padding: 8px;
+  width: 260px;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0px 1px 2px #382D26; }
+  @media (min-width: 900px) {
+    .login, .createUser {
+      margin-right: 8px; } }
+  .login h2, .createUser h2 {
+    text-align: center;
+    margin-top: 4px;
+    margin-bottom: 4px; }
+  .login p, .createUser p {
+    margin-top: 4px;
+    margin-bottom: 4px;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    justify-content: space-between; }
+    .login p button, .createUser p button {
+      margin: 4px;
+      transform: rotate(15deg);
+      border: none;
+      box-shadow: 0 1px 2px #382D26;
+      font-family: 'Coming Soon', sans-serif;
+      color: #473d36; }
+
+.login {
+  background-color: #FFC276;
+  border-top: 1px solid #FFC276;
+  background: linear-gradient(#E8AA5F, #FFC276); }
+  .login p button {
+    background-color: #FF9D57; }
+
+.createUser {
+  background-color: #FF7A57;
+  border-top: 1px solid #FF7A57;
+  background: linear-gradient(#E86440, #FF7A57); }
+  .createUser p button {
+    background-color: #FFC276; }
+
+.loginForm {
+  width: 240px; }
+
+form {
+  margin-top: 10px;
+  text-align: center; }
+  form input, form select, form button {
+    width: 240px;
+    text-align: left;
+    margin: auto;
+    background-color: #473d36;
+    font-family: 'Coming Soon', sans-serif;
+    font-weight: bold;
+    color: #A58772;
+    box-sizing: border-box;
+    transition: background-color 0.5s ease; }
+  form input:hover, form select:hover, form button:hover {
+    background-color: #6C5C51; }
+  form button, form input {
+    padding-left: 4px; }
+  form input {
+    border: 2px inset #6C5C51; }
+  form button, form select {
+    border: 2px outset #6C5C51; }
+
+#formContainer {
+  box-sizing: border-box;
+  width: 100%;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: space-between; }
+  @media (min-width: 900px) {
+    #formContainer {
+      height: 232px;
+      align-items: flex-start;
+      justify-content: flex-start;
+      flex-flow: row nowrap; } }
+
+#newTaskForm {
+  box-shadow: 0px 2px 4px #382D26;
+  position: fixed;
+  z-index: 998;
+  top: -400px;
+  right: 8px;
+  padding-top: 8px;
+  transition: top 0.5s ease;
+  background-color: #8A7566;
+  width: 248px;
+  padding: 4px;
+  box-sizing: border-box; }
+
+#subheader {
+  position: relative;
+  top: 56px;
+  margin-bottom: 16px; }
+  #subheader h1 {
+    width: 85%;
+    margin: auto;
+    color: #8A7566;
+    text-shadow: 1px 2px 2px #382D26; }
+    @media (min-width: 900px) {
+      #subheader h1 {
+        width: 850px; } }
+
+#kanbanPage #main {
+  flex-flow: column nowrap;
+  align-items: center; }
+  @media (min-width: 600px) {
+    #kanbanPage #main {
+      flex-flow: row nowrap;
+      align-items: flex-start;
+      justify-content: space-between; } }
+
+.column {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  margin: 4px;
+  padding: 8px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: space-between; }
+  @media (min-width: 600px) {
+    .column {
+      width: 30%;
+      max-width: 30%; } }
+  .column h2 {
+    font-weight: lighter;
+    font-size: 30px;
+    font-family: 'Righteous', sans-serif;
+    color: #8A7566;
+    text-shadow: 0 0 4px #382D26, 1px 2px 2px #382D26;
+    margin-top: 0px;
+    margin-bottom: 8px; }
+
+.kanbanItem {
+  border-radius: 2px;
+  width: 100%;
+  height: 100%;
+  margin-top: 4px;
+  margin-bottom: 4px;
+  text-align: center;
+  padding: 0px;
+  box-sizing: border-box;
+  box-shadow: 0px 1px 2px #382D26;
+  transition: position 0.5s ease, margin 0.5s ease, padding 0.5s ease, width 0.5s ease, box-shadow 0.5s ease; }
+  .kanbanItem p {
+    margin: 0px;
+    padding: 4px;
+    font-size: 12px; }
+    @media (min-width: 600px) {
+      .kanbanItem p {
+        font-size: 14px; } }
+    @media (min-width: 900px) {
+      .kanbanItem p {
+        font-size: 16px; } }
+  .kanbanItem h3 {
+    margin: 0px;
+    margin-bottom: 8px;
+    padding: 4px;
+    font-size: 16px; }
+    @media (min-width: 600px) {
+      .kanbanItem h3 {
+        font-size: 20px; } }
+    @media (min-width: 900px) {
+      .kanbanItem h3 {
+        font-size: 24px; } }
+
+.kanbanItem:hover {
+  width: 110%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5%;
+  padding-right: 5%;
+  margin: 0px;
+  box-shadow: 0 2px 4px #382D26; }
+
+.LOW {
+  background-color: #FFC276;
+  border-top: 1px solid #FFC276;
+  background: linear-gradient(#E8AA5F, #FFC276); }
+  .LOW button {
+    margin: 4px;
+    transform: rotate(15deg);
+    border: none;
+    background-color: #FF9D57;
+    box-shadow: 0 1px 2px #382D26;
+    font-family: 'Coming Soon', sans-serif;
+    color: #473d36; }
+
+.MEDIUM {
+  background-color: #FF9D57;
+  border-top: 1px solid #FF9D57;
+  background: linear-gradient(#E88340, #FF9D57); }
+  .MEDIUM button {
+    margin: 4px;
+    transform: rotate(15deg);
+    border: none;
+    background-color: #FF7A57;
+    box-shadow: 0 1px 2px #382D26;
+    font-family: 'Coming Soon', sans-serif;
+    color: #473d36; }
+
+.HIGH {
+  background-color: #FF7A57;
+  border-top: 1px solid #FF7A57;
+  background: linear-gradient(#E86440, #FF7A57); }
+  .HIGH button {
+    margin: 4px;
+    transform: rotate(15deg);
+    border: none;
+    background-color: #FFC276;
+    box-shadow: 0 1px 2px #382D26;
+    font-family: 'Coming Soon', sans-serif;
+    color: #473d36; }
+
 html {
   background-color: #473d36;
   font-family: 'Coming Soon', sans-serif;
   color: #473d36; }
 
-/* line 28, /home/alan/DevLeague/react-kanban/sass/styles.scss */
 h1 {
   font-family: 'Righteous', sans-serif; }
 
-/* line 32, /home/alan/DevLeague/react-kanban/sass/styles.scss */
 h3 {
   font-weight: bolder; }
 
-/* line 36, /home/alan/DevLeague/react-kanban/sass/styles.scss */
 #header {
   background-color: #6C5C51;
   z-index: 999;
@@ -29,7 +252,6 @@ h3 {
   justify-content: space-between;
   box-sizing: border-box;
   box-shadow: 0px 2px 2px #382D26; }
-  /* line 51, /home/alan/DevLeague/react-kanban/sass/styles.scss */
   #header h1 {
     width: 50%;
     margin: 0px;
@@ -38,13 +260,10 @@ h3 {
     color: #8A7566;
     text-shadow: 1px 2px 2px #382D26; }
     @media (min-width: 900px) {
-      /* line 51, /home/alan/DevLeague/react-kanban/sass/styles.scss */
       #header h1 {
         width: 35%; } }
-  /* line 62, /home/alan/DevLeague/react-kanban/sass/styles.scss */
   #header div {
     margin-right: 0px; }
-    /* line 64, /home/alan/DevLeague/react-kanban/sass/styles.scss */
     #header div button {
       font-family: 'Coming Soon', sans-serif;
       color: #473d36;
@@ -56,56 +275,11 @@ h3 {
       border: none;
       transition: background-color 0.5s ease; }
       @media (min-width: 900px) {
-        /* line 64, /home/alan/DevLeague/react-kanban/sass/styles.scss */
         #header div button {
           font-size: 12px; } }
-    /* line 78, /home/alan/DevLeague/react-kanban/sass/styles.scss */
     #header div button:hover {
       background-color: #A58772; }
 
-/* line 84, /home/alan/DevLeague/react-kanban/sass/styles.scss */
-#newTaskForm {
-  box-shadow: 0px 2px 4px #382D26;
-  position: fixed;
-  z-index: 998;
-  top: -400px;
-  right: 8px;
-  padding-top: 8px;
-  transition: top 0.5s ease;
-  background-color: #8A7566;
-  width: 248px;
-  padding: 4px;
-  box-sizing: border-box; }
-
-/* line 98, /home/alan/DevLeague/react-kanban/sass/styles.scss */
-form {
-  margin-top: 10px;
-  text-align: center; }
-  /* line 101, /home/alan/DevLeague/react-kanban/sass/styles.scss */
-  form input, form select, form button {
-    width: 240px;
-    text-align: left;
-    margin: auto;
-    background-color: #473d36;
-    font-family: 'Coming Soon', sans-serif;
-    font-weight: bold;
-    color: #A58772;
-    box-sizing: border-box;
-    transition: background-color 0.5s ease; }
-  /* line 112, /home/alan/DevLeague/react-kanban/sass/styles.scss */
-  form input:hover, form select:hover, form button:hover {
-    background-color: #6C5C51; }
-  /* line 115, /home/alan/DevLeague/react-kanban/sass/styles.scss */
-  form button, form input {
-    padding-left: 4px; }
-  /* line 118, /home/alan/DevLeague/react-kanban/sass/styles.scss */
-  form input {
-    border: 2px inset #6C5C51; }
-  /* line 121, /home/alan/DevLeague/react-kanban/sass/styles.scss */
-  form button, form select {
-    border: 2px outset #6C5C51; }
-
-/* line 126, /home/alan/DevLeague/react-kanban/sass/styles.scss */
 #navbar {
   position: fixed;
   top: 0px;
@@ -119,7 +293,6 @@ form {
   max-width: 65%;
   z-index: 1000;
   height: 48px; }
-  /* line 139, /home/alan/DevLeague/react-kanban/sass/styles.scss */
   #navbar li {
     margin-left: 4px;
     z-index: 1001;
@@ -131,7 +304,6 @@ form {
     flex-flow: row nowrap;
     align-items: center;
     transition: background-color 0.5s ease; }
-    /* line 150, /home/alan/DevLeague/react-kanban/sass/styles.scss */
     #navbar li a, #navbar li a:visited {
       width: 100%;
       text-decoration: none;
@@ -141,105 +313,11 @@ form {
       color: #473d36;
       text-align: center; }
       @media (min-width: 900px) {
-        /* line 150, /home/alan/DevLeague/react-kanban/sass/styles.scss */
         #navbar li a, #navbar li a:visited {
           font-size: 12px; } }
-  /* line 163, /home/alan/DevLeague/react-kanban/sass/styles.scss */
   #navbar li:hover {
     background-color: #A58772; }
 
-/* line 168, /home/alan/DevLeague/react-kanban/sass/styles.scss */
-#subheader {
-  position: relative;
-  top: 56px;
-  margin-bottom: 16px; }
-  /* line 172, /home/alan/DevLeague/react-kanban/sass/styles.scss */
-  #subheader h1 {
-    width: 85%;
-    margin: auto;
-    color: #8A7566;
-    text-shadow: 1px 2px 2px #382D26; }
-    @media (min-width: 900px) {
-      /* line 172, /home/alan/DevLeague/react-kanban/sass/styles.scss */
-      #subheader h1 {
-        width: 850px; } }
-
-/* line 183, /home/alan/DevLeague/react-kanban/sass/styles.scss */
-.login, .createUser {
-  padding: 8px;
-  width: 260px;
-  margin-bottom: 10px;
-  margin-top: 10px;
-  display: flex;
-  flex-flow: column nowrap;
-  align-items: center;
-  justify-content: space-between;
-  box-shadow: 0px 1px 2px #382D26; }
-  @media (min-width: 900px) {
-    /* line 183, /home/alan/DevLeague/react-kanban/sass/styles.scss */
-    .login, .createUser {
-      margin-right: 8px; } }
-  /* line 196, /home/alan/DevLeague/react-kanban/sass/styles.scss */
-  .login h2, .createUser h2 {
-    text-align: center;
-    margin-top: 4px;
-    margin-bottom: 4px; }
-  /* line 201, /home/alan/DevLeague/react-kanban/sass/styles.scss */
-  .login p, .createUser p {
-    margin-top: 4px;
-    margin-bottom: 4px;
-    display: flex;
-    flex-flow: column nowrap;
-    align-items: center;
-    justify-content: space-between; }
-    /* line 208, /home/alan/DevLeague/react-kanban/sass/styles.scss */
-    .login p button, .createUser p button {
-      margin: 4px;
-      transform: rotate(15deg);
-      border: none;
-      box-shadow: 0 1px 2px #382D26;
-      font-family: 'Coming Soon', sans-serif;
-      color: #473d36; }
-
-/* line 219, /home/alan/DevLeague/react-kanban/sass/styles.scss */
-.login {
-  background-color: #FFC276;
-  border-top: 1px solid #FFC276;
-  background: linear-gradient(#E8AA5F, #FFC276); }
-  /* line 224, /home/alan/DevLeague/react-kanban/sass/styles.scss */
-  .login p button {
-    background-color: #FF9D57; }
-
-/* line 230, /home/alan/DevLeague/react-kanban/sass/styles.scss */
-.createUser {
-  background-color: #FF7A57;
-  border-top: 1px solid #FF7A57;
-  background: linear-gradient(#E86440, #FF7A57); }
-  /* line 235, /home/alan/DevLeague/react-kanban/sass/styles.scss */
-  .createUser p button {
-    background-color: #FFC276; }
-
-/* line 241, /home/alan/DevLeague/react-kanban/sass/styles.scss */
-.loginForm {
-  width: 240px; }
-
-/* line 245, /home/alan/DevLeague/react-kanban/sass/styles.scss */
-#formContainer {
-  box-sizing: border-box;
-  width: 100%;
-  display: flex;
-  flex-flow: column nowrap;
-  align-items: center;
-  justify-content: space-between; }
-  @media (min-width: 900px) {
-    /* line 245, /home/alan/DevLeague/react-kanban/sass/styles.scss */
-    #formContainer {
-      height: 232px;
-      align-items: flex-start;
-      justify-content: flex-start;
-      flex-flow: row nowrap; } }
-
-/* line 260, /home/alan/DevLeague/react-kanban/sass/styles.scss */
 #main {
   box-sizing: border-box;
   position: relative;
@@ -261,140 +339,5 @@ form {
   border-radius: 4px;
   box-shadow: 0px 0px 1px #ede0cd, 0px 2px 1px #8A7566, 0px 4px 1px #8A7566, 0px 6px 2px #6C5C51, 0px 8px 4px #6C5C51, 2px 10px 8px #382D26, -2px 10px 8px #382D26; }
   @media (min-width: 900px) {
-    /* line 260, /home/alan/DevLeague/react-kanban/sass/styles.scss */
     #main {
       width: 850px; } }
-
-/* line 286, /home/alan/DevLeague/react-kanban/sass/styles.scss */
-#kanbanPage #main {
-  flex-flow: column nowrap;
-  align-items: center; }
-  @media (min-width: 600px) {
-    /* line 286, /home/alan/DevLeague/react-kanban/sass/styles.scss */
-    #kanbanPage #main {
-      flex-flow: row nowrap;
-      align-items: flex-start;
-      justify-content: space-between; } }
-
-/* line 297, /home/alan/DevLeague/react-kanban/sass/styles.scss */
-.column {
-  width: 100%;
-  max-width: 100%;
-  box-sizing: border-box;
-  margin: 4px;
-  padding: 8px;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  display: flex;
-  flex-flow: column nowrap;
-  align-items: center;
-  justify-content: space-between; }
-  @media (min-width: 600px) {
-    /* line 297, /home/alan/DevLeague/react-kanban/sass/styles.scss */
-    .column {
-      width: 30%;
-      max-width: 30%; } }
-  /* line 313, /home/alan/DevLeague/react-kanban/sass/styles.scss */
-  .column h2 {
-    font-weight: lighter;
-    font-size: 30px;
-    font-family: 'Righteous', sans-serif;
-    color: #8A7566;
-    text-shadow: 0 0 4px #382D26, 1px 2px 2px #382D26;
-    margin-top: 0px;
-    margin-bottom: 8px; }
-
-/* line 324, /home/alan/DevLeague/react-kanban/sass/styles.scss */
-.kanbanItem {
-  border-radius: 2px;
-  width: 100%;
-  height: 100%;
-  margin-top: 4px;
-  margin-bottom: 4px;
-  text-align: center;
-  padding: 0px;
-  box-sizing: border-box;
-  box-shadow: 0px 1px 2px #382D26;
-  transition: position 0.5s ease, margin 0.5s ease, padding 0.5s ease, width 0.5s ease, box-shadow 0.5s ease; }
-  /* line 334, /home/alan/DevLeague/react-kanban/sass/styles.scss */
-  .kanbanItem p {
-    margin: 0px;
-    padding: 4px;
-    font-size: 12px; }
-    @media (min-width: 600px) {
-      /* line 334, /home/alan/DevLeague/react-kanban/sass/styles.scss */
-      .kanbanItem p {
-        font-size: 14px; } }
-    @media (min-width: 900px) {
-      /* line 334, /home/alan/DevLeague/react-kanban/sass/styles.scss */
-      .kanbanItem p {
-        font-size: 16px; } }
-  /* line 346, /home/alan/DevLeague/react-kanban/sass/styles.scss */
-  .kanbanItem h3 {
-    margin: 0px;
-    margin-bottom: 8px;
-    padding: 4px;
-    font-size: 16px; }
-    @media (min-width: 600px) {
-      /* line 346, /home/alan/DevLeague/react-kanban/sass/styles.scss */
-      .kanbanItem h3 {
-        font-size: 20px; } }
-    @media (min-width: 900px) {
-      /* line 346, /home/alan/DevLeague/react-kanban/sass/styles.scss */
-      .kanbanItem h3 {
-        font-size: 24px; } }
-
-/* line 361, /home/alan/DevLeague/react-kanban/sass/styles.scss */
-.kanbanItem:hover {
-  width: 110%;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5%;
-  padding-right: 5%;
-  margin: 0px;
-  box-shadow: 0 2px 4px #382D26; }
-
-/* line 371, /home/alan/DevLeague/react-kanban/sass/styles.scss */
-.LOW {
-  background-color: #FFC276;
-  border-top: 1px solid #FFC276;
-  background: linear-gradient(#E8AA5F, #FFC276); }
-  /* line 375, /home/alan/DevLeague/react-kanban/sass/styles.scss */
-  .LOW button {
-    margin: 4px;
-    transform: rotate(15deg);
-    border: none;
-    background-color: #FF9D57;
-    box-shadow: 0 1px 2px #382D26;
-    font-family: 'Coming Soon', sans-serif;
-    color: #473d36; }
-
-/* line 386, /home/alan/DevLeague/react-kanban/sass/styles.scss */
-.MEDIUM {
-  background-color: #FF9D57;
-  border-top: 1px solid #FF9D57;
-  background: linear-gradient(#E88340, #FF9D57); }
-  /* line 390, /home/alan/DevLeague/react-kanban/sass/styles.scss */
-  .MEDIUM button {
-    margin: 4px;
-    transform: rotate(15deg);
-    border: none;
-    background-color: #FF7A57;
-    box-shadow: 0 1px 2px #382D26;
-    font-family: 'Coming Soon', sans-serif;
-    color: #473d36; }
-
-/* line 401, /home/alan/DevLeague/react-kanban/sass/styles.scss */
-.HIGH {
-  background-color: #FF7A57;
-  border-top: 1px solid #FF7A57;
-  background: linear-gradient(#E86440, #FF7A57); }
-  /* line 405, /home/alan/DevLeague/react-kanban/sass/styles.scss */
-  .HIGH button {
-    margin: 4px;
-    transform: rotate(15deg);
-    border: none;
-    background-color: #FFC276;
-    box-shadow: 0 1px 2px #382D26;
-    font-family: 'Coming Soon', sans-serif;
-    color: #473d36; }

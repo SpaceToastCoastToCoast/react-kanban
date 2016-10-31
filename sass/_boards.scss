@@ -1,0 +1,162 @@
+@import "colors";
+
+#newTaskForm {
+  box-shadow: 0px 2px 4px $header-shadow-color;
+  position: fixed;
+  z-index: 998;
+  top: -400px;
+  right: 8px;
+  padding-top: 8px;
+  transition: top 0.5s ease;
+  background-color: $header-text-color;
+  width: 248px;
+  padding: 4px;
+  box-sizing: border-box;
+}
+
+#subheader {
+  position: relative;
+  top: 56px;
+  margin-bottom: 16px;
+  h1 {
+    width: 85%;
+    margin: auto;
+    color: $header-text-color;
+    text-shadow: 1px 2px 2px $header-shadow-color;
+    @include respond-to(medium) {
+      width: 850px;
+    }
+  }
+}
+
+
+#kanbanPage {
+  #main {
+    flex-flow: column nowrap;
+    align-items: center;
+    @include respond-to(small) {
+      flex-flow: row nowrap;
+      align-items: flex-start;
+      justify-content: space-between;
+    }
+  }
+}
+
+.column {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  margin: 4px;
+  padding: 8px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: space-between;
+  @include respond-to(small) {
+    width: 30%;
+    max-width: 30%;
+  }
+  h2 {
+    font-weight: lighter;
+    font-size: 30px;
+    font-family: 'Righteous', sans-serif;
+    color: $header-text-color;
+    text-shadow: 0 0 4px $header-shadow-color, 1px 2px 2px $header-shadow-color;
+    margin-top: 0px;
+    margin-bottom: 8px;
+  }
+}
+
+.kanbanItem {
+  border-radius: 2px;
+  width: 100%;
+  height: 100%;
+  margin-top: 4px;
+  margin-bottom: 4px;
+  text-align: center;
+  padding: 0px;
+  box-sizing: border-box;
+  box-shadow: 0px 1px 2px $header-shadow-color;
+  p {
+    margin: 0px;
+    padding: 4px;
+    font-size: 12px;
+    @include respond-to(small) {
+      font-size: 14px;
+    }
+    @include respond-to(medium) {
+      font-size: 16px;
+    }
+  }
+
+  h3 {
+    margin: 0px;
+    margin-bottom: 8px;
+    padding: 4px;
+    font-size: 16px;
+    @include respond-to(small) {
+      font-size: 20px;
+    }
+    @include respond-to(medium) {
+      font-size: 24px;
+    }
+  }
+  transition: position 0.5s ease, margin 0.5s ease, padding 0.5s ease, width 0.5s ease, box-shadow 0.5s ease;
+}
+
+.kanbanItem:hover {
+  width: 110%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5%;
+  padding-right: 5%;
+  margin: 0px;
+  box-shadow: 0 2px 4px $header-shadow-color;
+}
+
+.LOW {
+  background-color: $low-background-color;
+  border-top: 1px solid $low-background-color;
+  background: linear-gradient($low-gradient-color, $low-background-color);
+  button {
+    margin: 4px;
+    transform: rotate(15deg);
+    border: none;
+    background-color: $medium-background-color;
+    box-shadow: 0 1px 2px $header-shadow-color;
+    font-family: 'Coming Soon', sans-serif;
+    color: $dark-color;
+  }
+}
+
+.MEDIUM {
+  background-color: $medium-background-color;
+  border-top: 1px solid $medium-background-color;
+  background: linear-gradient($medium-gradient-color, $medium-background-color);
+  button {
+    margin: 4px;
+    transform: rotate(15deg);
+    border: none;
+    background-color: $high-background-color;
+    box-shadow: 0 1px 2px $header-shadow-color;
+    font-family: 'Coming Soon', sans-serif;
+    color: $dark-color;
+  }
+}
+
+.HIGH {
+  background-color: $high-background-color;
+  border-top: 1px solid $high-background-color;
+  background: linear-gradient($high-gradient-color, $high-background-color);
+  button {
+    margin: 4px;
+    transform: rotate(15deg);
+    border: none;
+    background-color: $low-background-color;
+    box-shadow: 0 1px 2px $header-shadow-color;
+    font-family: 'Coming Soon', sans-serif;
+    color: $dark-color;
+  }
+}

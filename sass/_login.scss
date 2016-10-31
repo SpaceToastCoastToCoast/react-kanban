@@ -1,0 +1,106 @@
+@import "colors";
+
+.login, .createUser {
+  padding: 8px;
+  width: 260px;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0px 1px 2px $header-shadow-color;
+  @include respond-to(medium) {
+    margin-right: 8px;
+  }
+  h2 {
+    text-align: center;
+    margin-top: 4px;
+    margin-bottom: 4px;
+  }
+  p {
+    margin-top: 4px;
+    margin-bottom: 4px;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    justify-content: space-between;
+    button {
+      margin: 4px;
+      transform: rotate(15deg);
+      border: none;
+      box-shadow: 0 1px 2px $header-shadow-color;
+      font-family: 'Coming Soon', sans-serif;
+      color: $dark-color;
+    }
+  }
+}
+
+.login {
+  background-color: $low-background-color;
+  border-top: 1px solid $low-background-color;
+  background: linear-gradient($low-gradient-color, $low-background-color);
+  p {
+    button {
+      background-color: $medium-background-color;
+    }
+  }
+}
+
+.createUser {
+  background-color: $high-background-color;
+  border-top: 1px solid $high-background-color;
+  background: linear-gradient($high-gradient-color, $high-background-color);
+  p {
+    button {
+      background-color: $low-background-color;
+    }
+  }
+}
+
+.loginForm {
+  width: 240px;
+}
+
+form {
+  margin-top: 10px;
+  text-align: center;
+  input, select, button {
+    width: 240px;
+    text-align: left;
+    margin: auto;
+    background-color: $dark-color;
+    font-family: 'Coming Soon', sans-serif;
+    font-weight: bold;
+    color: $hover-color;
+    box-sizing: border-box;
+    transition: background-color 0.5s ease;
+  }
+  input:hover, select:hover, button:hover {
+    background-color: $header-color;
+  }
+  button, input {
+    padding-left: 4px;
+  }
+  input {
+    border: 2px inset $header-color;
+  }
+  button, select {
+    border: 2px outset $header-color;
+  }
+}
+
+#formContainer {
+  box-sizing: border-box;
+  width: 100%;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: space-between;
+  @include respond-to(medium) {
+    height: 232px;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-flow: row nowrap;
+  }
+}
