@@ -4,13 +4,12 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const CONFIG = require('./config/config.json');
 const log = require ('./middleware/log');
-const validate = require('./middleware/validation');
 const app = express();
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
-const bcrypt = require('bcrypt');
 const session = require('express-session');
 const RedisStore = require('connect-redis')(session);
+const bcrypt = require('bcrypt');
 const flash = require('connect-flash');
 const db = require('./models');
 const Card = db.Card;
@@ -22,7 +21,9 @@ const webpackMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
 const config = require('./webpack.config.js');
 
-const apiRouter = require('./routes/api')
+const apiRouter = require('./routes/api');
+const loginRouter = require('./routes/login');
+const userRouter = require('./routes/users');
 
 const priority = {
   high: 'HIGH',
@@ -81,102 +82,9 @@ passport.deserializeUser((user, done) => {
 
 passport.use(ls);
 
-const isAuthenticated = (req, res, next) => {
-  if(!req.isAuthenticated()) {
-    return res.json({
-      error: "Must log in",
-      login: undefined
-    });
-  } else {
-    return next();
-  }
-};
-
-app.get('/login', (req, res) => {
-  if(req.user !== undefined) {
-    res.json({
-      check: "hit",
-      login: req.username,
-      uid: req.user.id,
-      role: req.user.role
-    })
-  } else {
-    res.json({
-      check: "hit",
-      login: undefined
-    })
-  }
-
-});
-
-app.get('/logout', (req, res) => {
-  req.logout();
-  res.json({
-    logout: "success",
-    login: undefined
-  })
-});
-
-app.post('/login', (req, res, next) => {
-  passport.authenticate('local', (err, user, info) => {
-    if(err) {
-      //500 Internal Server Error
-      return next(err);
-    }
-    if(!user) {
-      return res.status(401).json({
-        error: "Login failed"
-      });
-    } else {
-      req.login(user, (loginErr) => {
-        if(loginErr) {
-          return next(loginErr);
-        }
-      })
-      return res.json({
-        check: "hit POST",
-        login: user.username,
-        role: user.role,
-        uid: user.id
-      })
-    }
-  })(req, res, next);
-});
-
-app.post('/users', validate.userValidate, (req, res) => {
-  //to create a new user
-  bcrypt.genSalt(10, (err, salt) => {
-    bcrypt.hash(req.body.password, salt, (err, hash) => {
-      User.create({ username: req.body.username,
-        password: hash,
-        role: 'USER'})
-      .then((user) => {
-        res.json({
-          success: true
-        });
-      })
-      .catch((err) => {
-        //req.flash('info', 'Invalid input in user account fields');
-        res.json({
-          error: "Invalid username or password"
-        });
-      });
-    });
-  });
-});
-
-app.get('/users', (req, res) => {
-  User.findAll({
-    attributes: ['username', 'role', 'id']
-  })
-  .then((users) => {
-    res.json({
-      users: users
-    })
-  })
-})
-
 app.use(apiRouter);
+app.use(loginRouter);
+app.use(userRouter);
 
 // Check to see what dev environment we are in
 const isDeveloping = process.env.NODE_ENV !== 'production';
