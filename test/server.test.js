@@ -1,5 +1,5 @@
 const express = require('express');
-const app = require('../kanban');
+const app = require('../server');
 const supertest = require("supertest")(app);
 
 const freshApiData = JSON.stringify({
@@ -11,7 +11,9 @@ const freshApiData = JSON.stringify({
       "priority":"1 HIGH",
       "status":"DONE",
       "creator_id":1,
-      "assignee_id":1
+      "assignee_id":1,
+      "creator": {"id":1,"username":"kanbanadmin"},
+      "assignee":{"id":1,"username":"kanbanadmin"}
     }, {
       "id":2,
       "title":"Clean fishtank",
@@ -19,7 +21,9 @@ const freshApiData = JSON.stringify({
       "priority":"2 MEDIUM",
       "status":"DOING",
       "creator_id":1,
-      "assignee_id":1
+      "assignee_id":1,
+      "creator":{"id":1,"username":"kanbanadmin"},
+      "assignee":{"id":1,"username":"kanbanadmin"}
     }, {
       "id":1,
       "title":"Feed fish",
@@ -27,7 +31,9 @@ const freshApiData = JSON.stringify({
       "priority":"3 LOW",
       "status":"TO_DO",
       "creator_id":1,
-      "assignee_id":1
+      "assignee_id":1,
+      "creator":{"id":1,"username":"kanbanadmin"},
+      "assignee":{"id":1,"username":"kanbanadmin"}
     }
   ]
 });
@@ -35,21 +41,25 @@ const freshApiData = JSON.stringify({
 const editedApiData = JSON.stringify({
   data: [
     {
-      "id":3,
-      "title":"Plug leak",
-      "description":"the fish are dying!",
-      "priority":"1 HIGH",
-      "status":"DONE",
-      "creator_id":1,
-      "assignee_id":1
-    }, {
       "id":2,
       "title":"Clean fishtank",
       "description":"nasty!",
       "priority":"1 HIGH",
       "status":"DOING",
       "creator_id":1,
-      "assignee_id":1
+      "assignee_id":1,
+      "creator":{"id":1,"username":"kanbanadmin"},
+      "assignee":{"id":1,"username":"kanbanadmin"}
+    }, {
+      "id":3,
+      "title":"Plug leak",
+      "description":"the fish are dying!",
+      "priority":"1 HIGH",
+      "status":"DONE",
+      "creator_id":1,
+      "assignee_id":1,
+      "creator": {"id":1,"username":"kanbanadmin"},
+      "assignee":{"id":1,"username":"kanbanadmin"}
     }, {
       "id":1,
       "title":"Feed fish",
@@ -57,7 +67,9 @@ const editedApiData = JSON.stringify({
       "priority":"3 LOW",
       "status":"TO_DO",
       "creator_id":1,
-      "assignee_id":1
+      "assignee_id":1,
+      "creator":{"id":1,"username":"kanbanadmin"},
+      "assignee":{"id":1,"username":"kanbanadmin"}
     }
   ]
 });
