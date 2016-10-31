@@ -32,7 +32,7 @@ class KanbanItem extends React.Component {
     e.preventDefault();
     const oReq = new XMLHttpRequest();
     oReq.addEventListener('load', this.onApiData.bind(this));
-    oReq.open("PUT", `http://localhost:3000/api/${this.props.itemId}`);
+    oReq.open("PUT", `${this.props.apiAddress}/${this.props.itemId}`);
     oReq.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
     oReq.send(`priority=${this.changeProperty(this.props.priority)}`);
   }
@@ -41,7 +41,7 @@ class KanbanItem extends React.Component {
     e.preventDefault();
     const oReq = new XMLHttpRequest();
     oReq.addEventListener('load', this.onApiData.bind(this));
-    oReq.open("PUT", `http://localhost:3000/api/${this.props.itemId}`);
+    oReq.open("PUT", `${this.props.apiAddress}/${this.props.itemId}`);
     oReq.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
     oReq.send(`status=${this.changeProperty(this.props.status)}`);
   }

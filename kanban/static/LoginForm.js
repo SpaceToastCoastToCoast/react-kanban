@@ -12,11 +12,10 @@ class LoginForm extends React.Component {
   onUserAction(response) {
     const { dispatch } = this.props;
     let errorMessage = JSON.parse(response.currentTarget.response).error;
-    console.log(errorMessage);
     if(errorMessage === undefined) {
       errorMessage = "";
     }
-    const loginMessage = JSON.parse(response.currentTarget.response).login;
+    const loginMessage = JSON.parse(response.currentTarget.response);
     document.getElementById("flashMessage").innerHTML = errorMessage;
     if(errorMessage === undefined || errorMessage === "") {
     //successful redirect
@@ -38,7 +37,6 @@ class LoginForm extends React.Component {
 
   formHandler(e, location) {
     e.preventDefault();
-    console.log(this.props);
     const oReq = new XMLHttpRequest();
     oReq.addEventListener('load', this.onUserAction.bind(this));
     oReq.open("POST", `http://localhost:3000/${location}`);

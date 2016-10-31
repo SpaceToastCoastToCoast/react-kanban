@@ -14,7 +14,7 @@ class NewTaskForm extends React.Component {
     e.preventDefault();
     const oReq = new XMLHttpRequest();
     oReq.addEventListener('load', this.onApiData.bind(this));
-    oReq.open("POST", "http://localhost:3000/api");
+    oReq.open("POST", `${this.props.apiAddress}`);
     oReq.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
     oReq.send(`title=${this.refs.title.value}&description=${this.refs.description.value}&priority=${this.refs.priority.value}&status=TO_DO&creator_id=${this.props.userID}&assignee_id=${this.refs.assignee_id.value}`);
   }

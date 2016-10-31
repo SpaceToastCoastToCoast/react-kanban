@@ -44,18 +44,21 @@ class KanbanPage extends React.Component {
   render() {
     return (
       <div id="kanbanPage">
-        <NewTaskForm
+        <NewTaskForm apiAddress={this.props.apiAddress}
         />
         <div id="main">
           <KanbanQueue
+            apiAddress={this.props.apiAddress}
             data={this.props.data}
             listType="TO_DO"
           />
           <KanbanQueue
+            apiAddress={this.props.apiAddress}
             data={this.props.data}
             listType="DOING"
           />
           <KanbanQueue
+            apiAddress={this.props.apiAddress}
             data={this.props.data}
             listType="DONE"
           />

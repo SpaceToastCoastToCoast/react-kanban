@@ -4,6 +4,7 @@ const session = require('express-session');
 const db = require('../models');
 const Card = db.Card;
 const User = db.User;
+const passport = require('passport');
 
 const isAuthenticated = (req, res, next) => {
   if(!req.isAuthenticated()) {
