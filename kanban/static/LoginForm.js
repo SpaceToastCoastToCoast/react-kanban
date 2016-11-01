@@ -19,11 +19,11 @@ class LoginForm extends React.Component {
     document.getElementById("flashMessage").innerHTML = errorMessage;
     if(errorMessage === undefined || errorMessage === "") {
     //successful redirect
-      if(loginMessage !== undefined) {
+      if (JSON.parse(response.currentTarget.response).logout !== undefined) {
+        dispatch(logOut(loginMessage));
+      } else if (loginMessage !== undefined) {
         this.context.router.push("/");
         dispatch(logIn(loginMessage));
-      } else {
-        dispatch(logOut(loginMessage));
       }
     }
   }

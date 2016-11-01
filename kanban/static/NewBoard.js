@@ -17,7 +17,7 @@ class NewBoard extends React.Component {
     return(
       <div>
         <div id="subheader">
-          <h1>New Board</h1>
+          <h1>Your Tasks</h1>
         </div>
         {newPage()}
       </div>
