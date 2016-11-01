@@ -66,9 +66,12 @@ form {
   margin-top: 10px;
   text-align: center;
   input, select, button {
+    margin-top: 2px;
+    margin-bottom: 0px;
     width: 240px;
     text-align: left;
-    margin: auto;
+    margin-left: auto;
+    margin-right: auto;
     background-color: $dark-color;
     font-family: 'Coming Soon', sans-serif;
     font-weight: bold;

@@ -17,8 +17,8 @@ ReactDOM.render(
     <Router history={browserHistory} >
       <Route path='/' component={App} >
         <IndexRoute component={KanbanClient} />
-        <Route path='/newBoard' component={NewBoard} />
-        <Route path='/login' component={Login} />
+        <Route path='/userBoard' component={NewBoard} />
+        <Route path='/loginPage' component={Login} />
       </Route>
     </Router>
   </Provider>,
