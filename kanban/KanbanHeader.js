@@ -25,7 +25,7 @@ class KanbanHeader extends React.Component {
                 return "Login";
               }
             }.call(this)}</Link></li>
-            <li><Link to='/newBoard'>New Board</Link></li>
+            <li><Link to='/newBoard'>Your Board</Link></li>
             <li><Link to='/'>Main Board</Link></li>
             {function(){
               if (this.props.pathname !== '/login') {

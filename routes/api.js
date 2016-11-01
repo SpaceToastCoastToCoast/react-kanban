@@ -18,7 +18,6 @@ getAllCards = (req, res) => {
       'creator.username',
       'assignee.username'
     ],
-    order: [['priority', 'ASC']],
     include: [
       {
         model: User,
@@ -29,7 +28,8 @@ getAllCards = (req, res) => {
         as: 'assignee',
         attributes: ['id', 'username']
       }
-    ]
+    ],
+    order: [['priority', 'ASC']]
   })
   .then((data)=>{
     res.json({data: data});
@@ -52,7 +52,6 @@ getUserCards = (req, res, userID) => {
       'creator.username',
       'assignee.username'
     ],
-    order: [['priority', 'ASC']],
     include: [
       {
         model: User,
@@ -75,7 +74,8 @@ getUserCards = (req, res, userID) => {
           }
         }
       ]
-    }
+    },
+    order: [['priority', 'ASC']]
   })
   .then((data)=> {
     res.json({data: data});

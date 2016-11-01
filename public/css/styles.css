@@ -1,5 +1,4 @@
 @import url("https://fonts.googleapis.com/css?family=Coming+Soon|Righteous");
-
 .login, .createUser {
   padding: 8px;
   width: 260px;
@@ -300,6 +299,7 @@ h3 {
     list-style-type: none;
     height: 48px;
     background-color: #8A7566;
+    flex-grow: 1;
     display: flex;
     flex-flow: row nowrap;
     align-items: center;
