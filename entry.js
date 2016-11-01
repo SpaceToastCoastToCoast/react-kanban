@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Router, Route, hashHistory, IndexRoute } from 'react-router';
+import { Router, Route, browserHistory, IndexRoute } from 'react-router';
 import { createStore, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
 import * as reducers from './reducers';
@@ -14,7 +14,7 @@ const store = createStore(reducer);
 
 ReactDOM.render(
   <Provider store={store} >
-    <Router history={hashHistory} >
+    <Router history={browserHistory} >
       <Route path='/' component={App} >
         <IndexRoute component={KanbanClient} />
         <Route path='/newBoard' component={NewBoard} />
