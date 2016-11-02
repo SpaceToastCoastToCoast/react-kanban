@@ -32,7 +32,7 @@ class KanbanHeader extends React.Component {
             }.call(this)}
             <li><Link to='/'>Main Board</Link></li>
             {function(){
-              if (this.props.pathname !== '/loginPage') {
+              if (this.props.pathname !== '/loginPage' && this.props.login !== undefined) {
                 return <li><button onClick={this.revealNewPost}>New Task</button></li>
               }
             }.call(this)}

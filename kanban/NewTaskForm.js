@@ -7,7 +7,12 @@ class NewTaskForm extends React.Component {
   onApiData(data) {
     const { dispatch } = this.props;
     const parsedKanbanData = JSON.parse(data.currentTarget.response).data;
-    dispatch(receiveCards(parsedKanbanData));
+    let errorMessage = JSON.parse(data.currentTarget.response).error;
+    if(errorMessage === undefined) {
+      errorMessage = "";
+      dispatch(receiveCards(parsedKanbanData));
+    }
+    document.getElementById("formError").innerHTML = errorMessage;
   }
 
   formHandler(e) {
@@ -27,19 +32,21 @@ class NewTaskForm extends React.Component {
     })
     return (
       <div id="newTaskForm">
-      <form method="post" id="taskForm" action="/api" onSubmit={(e)=> {this.formHandler = this.formHandler.bind(this); this.formHandler(e);}}>
-        <input type="text" name="title" ref="title" placeholder="Title"></input>
-        <input type="text" name="description" ref="description" placeholder="Description"></input>
-        <select name="priority" ref="priority">
-          <option value="3 LOW">LOW</option>
-          <option value="2 MEDIUM">MEDIUM</option>
-          <option value="1 HIGH">HIGH</option>
-        </select>
-        <select name="assignee_id" ref="assignee_id">
-          { assignees }
-        </select>
-        <button type="submit">Submit</button>
-      </form>
+        <div id="formError">
+        </div>
+        <form method="post" id="taskForm" action="/api" onSubmit={(e)=> {this.formHandler = this.formHandler.bind(this); this.formHandler(e);}}>
+          <input type="text" name="title" ref="title" placeholder="Title"></input>
+          <input type="text" name="description" ref="description" placeholder="Description"></input>
+          <select name="priority" ref="priority">
+            <option value="3 LOW">LOW</option>
+            <option value="2 MEDIUM">MEDIUM</option>
+            <option value="1 HIGH">HIGH</option>
+          </select>
+          <select name="assignee_id" ref="assignee_id">
+            { assignees }
+          </select>
+          <button type="submit">Submit</button>
+        </form>
       </div>
     )
   }

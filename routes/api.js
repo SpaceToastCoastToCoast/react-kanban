@@ -107,8 +107,7 @@ router.route('/api')
     getAllCards(req, res);
   })
   .catch((error) => {
-    console.error(error);
-    res.status(400).json({
+    res.json({
       error: 'Invalid input'
     });
   });
