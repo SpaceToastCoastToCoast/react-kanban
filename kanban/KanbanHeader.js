@@ -15,28 +15,30 @@ class KanbanHeader extends React.Component {
   render() {
     return (
       <div id="header">
-        <h1>Kanban</h1>
-        <div>
-          <ul role='nav' id="navbar">
-            <li><Link to='/loginPage'>{function(){
-              if(this.props.login !== undefined) {
-                return "Logout";
-              } else {
-                return "Login";
-              }
-            }.call(this)}</Link></li>
-            {function(){
-              if(this.props.login !== undefined) {
-                return <li><Link to='/userBoard'>Your Board</Link></li>
-              }
-            }.call(this)}
-            <li><Link to='/'>Main Board</Link></li>
-            {function(){
-              if (this.props.pathname !== '/loginPage' && this.props.login !== undefined) {
-                return <li><button onClick={this.revealNewPost}>New Task</button></li>
-              }
-            }.call(this)}
-          </ul>
+        <div id="headerContainer">
+          <h1>Kanban</h1>
+          <div>
+            <ul role='nav' id="navbar">
+              <li><Link to='/loginPage'>{function(){
+                if(this.props.login !== undefined) {
+                  return "Logout";
+                } else {
+                  return "Login";
+                }
+              }.call(this)}</Link></li>
+              {function(){
+                if(this.props.login !== undefined) {
+                  return <li><Link to='/userBoard'>Your Board</Link></li>
+                }
+              }.call(this)}
+              <li><Link to='/'>Main Board</Link></li>
+              {function(){
+                if (this.props.pathname !== '/loginPage' && this.props.login !== undefined) {
+                  return <li><button onClick={this.revealNewPost}>New Task</button></li>
+                }
+              }.call(this)}
+            </ul>
+          </div>
         </div>
       </div>
     )

@@ -253,57 +253,75 @@ h3 {
   width: 100%;
   height: 48px;
   padding: 0px;
-  display: flex;
-  flex-flow: row nowrap;
-  align-items: center;
-  justify-content: space-between;
   box-sizing: border-box;
   box-shadow: 0px 2px 2px #382D26; }
-  #header h1 {
-    width: 50%;
-    margin: 0px;
-    margin-left: 16px;
-    margin-right: 16px;
-    color: #8A7566;
-    text-shadow: 1px 2px 2px #382D26; }
-    @media (min-width: 900px) {
-      #header h1 {
-        width: 35%; } }
-  #header div {
-    margin-right: 0px; }
-    #header div button {
-      font-family: 'Coming Soon', sans-serif;
-      color: #473d36;
-      font-weight: bold;
-      font-size: 10px;
-      height: 48px;
-      width: 100%;
-      background-color: #8A7566;
-      border: none;
-      transition: background-color 0.5s ease; }
+  #header #headerContainer {
+    padding-left: 4px;
+    padding-right: 4px;
+    margin: auto;
+    width: 85%;
+    height: 48px;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box; }
+    #header #headerContainer h1 {
+      width: 50%;
+      margin: 0px;
+      margin-right: 16px;
+      color: #8A7566;
+      text-shadow: 1px 2px 2px #382D26; }
       @media (min-width: 900px) {
-        #header div button {
-          font-size: 12px; } }
-    #header div button:hover {
-      background-color: #A58772; }
+        #header #headerContainer h1 {
+          width: 35%; } }
+    #header #headerContainer div {
+      text-align: right;
+      height: 48px;
+      margin-right: 0px;
+      flex-grow: 0;
+      box-sizing: border-box;
+      display: flex;
+      flex-flow: row nowrap;
+      align-items: flex-start;
+      justify-content: flex-end;
+      max-width: 65%; }
+      #header #headerContainer div button {
+        font-family: 'Coming Soon', sans-serif;
+        color: #473d36;
+        font-weight: bold;
+        font-size: 9px;
+        height: 48px;
+        width: 100%;
+        background-color: #8A7566;
+        border: none;
+        transition: background-color 0.5s ease; }
+        @media (min-width: 900px) {
+          #header #headerContainer div button {
+            font-size: 12px; } }
+      #header #headerContainer div button:hover {
+        background-color: #A58772; }
+    @media (min-width: 900px) {
+      #header #headerContainer {
+        width: 850px; } }
 
 #navbar {
-  position: fixed;
-  top: 0px;
-  right: 0px;
   display: flex;
   margin-top: 0px;
+  margin-right: 0px;
   flex-flow: row nowrap;
   align-items: center;
   justify-content: flex-end;
   width: 416px;
-  max-width: 65%;
+  max-width: 100%;
   z-index: 1000;
-  height: 48px; }
+  height: 48px;
+  box-sizing: border-box; }
   #navbar li {
     margin-left: 4px;
     z-index: 1001;
     width: 96px;
+    min-width: 28%;
     list-style-type: none;
     height: 48px;
     background-color: #8A7566;
@@ -315,7 +333,7 @@ h3 {
       width: 100%;
       text-decoration: none;
       line-height: 48px;
-      font-size: 10px;
+      font-size: 9px;
       font-weight: bold;
       color: #473d36;
       text-align: center; }
