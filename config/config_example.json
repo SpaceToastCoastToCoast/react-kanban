@@ -1,4 +1,5 @@
 {
+  "SECRET": "keyboard_cat",
   "development": {
     "username": "kanban_admin",
     "password": "your password here",
