@@ -3,6 +3,8 @@ react-kanban
 
 Express, Sequelize, HTML5, React and Redux, stored on PostgreSQL
 
+![](https://github.com/SpaceToastCoastToCoast/react-kanban/blob/master/kanban-screenshot.png)
+
 ---
 
 An interactive kanban board for assigning tasks to users. Tasks have a title, a short description, a progress status, a priority, a task creator and an assignee. This board displays tasks in an easy to read visual format.
